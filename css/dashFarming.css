@@ -1,0 +1,185 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Courier New", Courier, monospace;
+}
+
+body {
+  height: 100vh;
+  background-color: #c7d5ce;
+}
+
+/* ADDING CSS TO THE NAV SECTION 'header' */
+#header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  margin: 0 auto;
+  background-color: #eee;
+  width: 100%;
+  box-shadow: 0 0.5rem 0.95rem rgb(0, 0, 0, 0.09);
+}
+
+/* ADDING CSS TO THE LOGO */
+.logo {
+  text-decoration: none;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #8d448b;
+  margin-left: 0.5rem;
+}
+
+/* ADDING CSS TO THE UL LINKS 'navigation' */
+#navigation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#navigation li {
+  list-style: none;
+  padding: 0 1.2rem;
+}
+
+#navigation li a {
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 300;
+  color: #009578;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 0.3rem;
+}
+
+#navigation li a:hover {
+  background-color: #acbce1;
+  color: white;
+  transition: 0.8s ease-out;
+}
+
+#navigation li a.active {
+  background-color: #61c0b7;
+  transition: 1s ease-out;
+  color: white;
+}
+
+/* ADDING CSS TO THE PROFILE PICTURE */
+.profImg {
+  height: 3.75rem;
+  width: 3.75rem;
+  border-radius: 50%;
+  margin-right: 0.5rem;
+}
+
+#shortMsg {
+  /* background: #eee888; */
+  height: 70vh;
+  padding: 2rem 5rem;
+}
+
+.shortMsgGap {
+  margin-bottom: 1rem;
+}
+
+.toggle-btn {
+  color: #000;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: none;
+}
+
+/* DROP-DOWN MENU */
+.dropMenu {
+  display: none;
+  height: 0;
+  position: absolute;
+  right: 2rem;
+  top: 60px;
+  width: 19.75rem;
+  background: rgb(255, 255, 255, 0.4);
+  /* backdrop-filter: blur(15px); */
+  border-radius: 10px;
+  overflow: hidden;
+  transition: height 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.dropMenuOpened {
+  height: 15rem;
+}
+
+.dropMenu ul {
+  margin-top: 0.3rem;
+}
+
+.dropMenu li {
+  list-style: none;
+}
+.dropMenu li a {
+  padding: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: stretch;
+  text-decoration: none;
+}
+
+.dropMenu a .profImg {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  padding-top: 0.2rem;
+}
+
+.dropMenu li a:hover {
+  background-color: #acbce1;
+  color: white;
+  transition: 0.3s ease-in;
+}
+
+.dropMenu li a.active {
+  background-color: #61c0b7;
+  transition: 1s ease-in-out;
+  color: white;
+}
+
+/* ADDING RESPONSIVENESS */
+@media (max-width: 992px) {
+  #navigation li a,
+  .profImg {
+    display: none;
+  }
+
+  .toggle-btn {
+    display: block;
+  }
+
+  /* DISPLAYING THE DRO-DOWN MENU */
+  .dropMenu {
+    display: block;
+    position: initial;
+    margin-left: auto;
+    margin-right: 1.94rem;
+  }
+
+  .dropMenu a .profImg {
+    margin-top: 0.1rem;
+  }
+}
+
+/* ADDING RESPONSIVE FOR SMALLER SCREENS */
+@media (max-width: 576px) {
+  .dropMenu {
+    left: 2rem;
+    width: unset;
+    margin: unset;
+  }
+
+  .dropMenu a .profImg {
+    margin-top: 0.1rem;
+  }
+
+  .dropMenuOpened {
+    position: initial;
+  }
+}
