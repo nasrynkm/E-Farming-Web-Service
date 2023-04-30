@@ -5,7 +5,175 @@
   font-family: "Courier New", Courier, monospace;
 }
 
-.submitContainer {
+.addContainer {
+  box-sizing: border-box;
+  /* display: flex; */
+  padding: 20px 24px 20px 22px;
+  border-bottom: 1px solid rgb(245, 245, 245);
+  width: 100%;
+  flex-direction: column;
+  height: auto;
+  background-color: white;
+  position: relative;
+}
+
+.innerAddsContainer {
+  margin: 0px;
+  /* min-width: 0px; */
+  background: whitesmoke;
+  padding: 2rem;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  z-index: 2;
+}
+
+.componentFlex1 {
+  /* display: flex; */
+  flex: 260 1 0%;
+  flex-direction: column;
+}
+
+.addUserInner {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.addLocation {
+  margin: 1.1rem 0rem 0rem 0;
+  font-size: 0.94rem;
+  font-weight: 300;
+  color: rgb(30, 35, 41);
+}
+
+.componentFlex2 {
+  display: flex;
+  flex: 242 1 0%;
+  /* background: rebeccapurple; */
+}
+
+.addPriceContainer {
+  margin: 0px 0px 12px;
+  display: flex;
+  align-items: baseline;
+  height: 24px;
+  flex-direction: column;
+}
+
+.addPriceRowAlign {
+  display: flex;
+  flex-direction: row;
+  -webkit-box-align: baseline;
+  align-items: baseline;
+}
+
+.addPrice {
+  margin: 0px 4px 0px 0px;
+  font-size: 1.25rem;
+  color: rgb(11, 14, 17);
+}
+
+.productWeight {
+  margin: 0px 8px 0px 0px;
+  font-size: 0.75rem;
+}
+
+.componentFlex3 {
+  display: flex;
+  flex: 265 1 0%;
+  flex-direction: column;
+}
+
+.css-vurnku {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+}
+
+.amountAvailable {
+  margin: 0px 0px 8px;
+  display: flex;
+  -webkit-box-align: baseline;
+  align-items: baseline;
+  flex-direction: column;
+}
+
+.quantityHeader {
+  margin: 0px 8px 0px 0px;
+  min-width: 50px;
+  color: rgb(112, 122, 138);
+  text-align: left;
+  font-size: 0.75rem;
+}
+
+.limitComponent {
+  display: flex;
+  -webkit-box-align: baseline;
+  align-items: baseline;
+  flex-direction: column;
+}
+
+.limitWrap {
+  direction: ltr;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.weightLimitFlex {
+  display: flex;
+}
+
+.dashLimit {
+  margin: 0px 4px;
+}
+
+.componentFlex4 {
+  min-width: 0px;
+  display: flex;
+  flex: 126 1 0%;
+}
+
+.buttonContainer {
+  min-width: 0px;
+  display: flex;
+  width: 0px;
+  align-items: flex-start;
+}
+
+.buttonComponent {
+  margin: 0px;
+  appearance: none;
+  user-select: none;
+  cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: inline-flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  box-sizing: border-box;
+  font-size: 14px;
+  font-family: inherit;
+  font-weight: 500;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  padding: 6px 12px;
+  line-height: 20px;
+  min-width: 52px;
+  word-break: keep-all;
+  color: rgb(255, 255, 255);
+  border-radius: 4px;
+  min-height: 24px;
+  border: none;
+  background-color: rgb(14, 203, 129);
+  width: 0px;
+}
+
+/* .submitContainer {
   width: 100%;
   height: 100vh;
   display: flex;
@@ -23,4 +191,78 @@
   cursor: pointer;
   font-weight: 500;
   font-size: 1.05rem;
+} */
+
+@media screen and (min-width: 1023px) {
+  .css-4ptx7h {
+    flex-direction: row;
+  }
+}
+
+@media screen and (min-width: 767px) {
+  .css-4ptx7h {
+    flex-direction: column;
+  }
+}
+
+@media screen and (min-width: 1023px) {
+  .amountAvailable {
+    flex-direction: row;
+  }
+}
+
+@media screen and (min-width: 767px) {
+  .amountAvailable {
+    flex-direction: column;
+  }
+}
+
+@media screen and (min-width: 1023px) {
+  .limitComponent {
+    flex-direction: row;
+  }
+}
+
+@media screen and (min-width: 767px) {
+  .limitComponent {
+    flex-direction: column;
+  }
+}
+
+@media screen and (min-width: 1023px) {
+  .buttonContainer {
+    width: 126px;
+  }
+}
+
+@media screen and (min-width: 767px) {
+  .buttonContainer {
+    width: 126px;
+  }
+}
+
+@media screen and (min-width: 1023px) {
+  .buttonComponent {
+    width: 126px;
+  }
+}
+
+@media screen and (min-width: 767px) {
+  .buttonComponent {
+    width: 126px;
+  }
+}
+
+@media screen and (max-width: 766px) {
+  .css-8l9x78 {
+    box-sizing: border-box;
+    margin: 0px;
+    min-width: 0px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border-bottom: 1px solid rgb(234, 236, 239);
+    padding: 24px 0px 16px;
+    background-color: white;
+  }
 }
