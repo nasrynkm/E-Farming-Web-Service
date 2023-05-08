@@ -7,7 +7,11 @@
 
 body {
   height: 100vh;
-  background-color: #c7d5ce;
+  background: linear-gradient(
+    90deg,
+    rgba(141, 194, 111, 1) 0%,
+    rgba(118, 184, 82, 1) 50%
+  );
 }
 
 /* ADDING CSS TO THE NAV SECTION 'header' */
@@ -36,6 +40,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 
 #navigation li {
@@ -65,10 +70,31 @@ body {
   color: white;
 }
 
+#navigation input {
+  position: absolute;
+  height: 2.3rem;
+  width: calc(91.5%);
+  border: 1px solid #ccc;
+  padding: 0 0.82rem;
+  font-size: 1rem;
+  border-radius: 0.33rem 0 0 0.33rem;
+  outline: none;
+}
+
+#navigation button {
+  width: 1.2rem;
+  height: 2.3rem;
+  border: none;
+  outline: none;
+  color: #fff;
+  background: #333;
+  border-radius: 0 0.33rem 0.33rem 0;
+}
+
 /* ADDING CSS TO THE PROFILE PICTURE */
 .profImg {
-  height: 3.75rem;
-  width: 3.75rem;
+  height: 3.125rem;
+  width: 3.125rem;
   border-radius: 50%;
   margin-right: 0.5rem;
 }

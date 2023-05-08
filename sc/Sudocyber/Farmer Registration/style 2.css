@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'segoe UI', 'Segoe UI', Tahoma, Geneva, Verdana,
+    sans-serif;
+}
+
+body {
+   color: #162938;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   min-height: 100vh;
+}
+
+.container {
+    max-width: 700px;
+    width: 60%;
+    padding: 25px 30px;
+    border-radius: 25px;
+    border:2px solid rgba(255, 255, 255, .5);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 30px rgba(0, 0, 0, .5);
+
+}
+
+.container .heading {
+    font-size: 30px;
+    font-weight: 500;
+    position: relative;
+    text-align: center;
+    padding: 0 0 40px 0;
+}
+
+.container .heading::before{
+    content: '';
+    position:absolute;
+    height: 3px;
+    left: 0;
+    bottom: 15%;
+    width: 100%;
+    background: linear-gradient(135deg, #455a67, #162938);
+}
+
+.container form .card-details {
+    margin-top: 25px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    
+}
+
+form .card-details .card-box{
+    
+    width: calc(100% / 2 - 18px);
+    margin-bottom: 15px;
+}
+
+.card-details .card-box .details{
+    display: block;
+    font-weight: 500;
+    margin-bottom: 5px;
+
+}
+
+.card-details .card-box input{
+    height: 45px;
+    width: 100%;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding-left: 15px;
+    font-size: 16px;
+    border-bottom-width: 2px;
+    transition: all 0.3s ease;
+
+}
+
+form .circal-form .circal-title{
+    font-size: 20px;
+    font-weight: 500;
+    border-bottom: 2px solid;
+    
+}
+
+form .circal-form .category{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.btn {
+    width: 100%;
+    height: 45px;
+    background: #162938;
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1em;
+    color: #fff;
+    font-weight: 500;
+ }
+
+.gender-category{
+    margin: 15px;
+    color: #fff;
+}
+.gender-category label{
+    padding: 0 20px 0 5px;
+}
+
+.gender-category label,
+.gender-category input,
+.form-submit-btn input{
+    cursor: pointer;
+}
+
+ @media (max-width: 716px) {
+    .container {
+        min-width: 514px;
+    }
+
+    .user-input-box{
+        margin-bottom: 12px;
+        width: 100%;
+    }
+
+    .user-input-box:nth-child(2n){
+        justify-content: space-between;
+    }
+    .gender-category{
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+    .main-user-info{
+        max-height: 380px;
+        overflow: auto;
+    }
+
+    .main-user-info::-webkit-scrollbar{
+        width: 0;
+    }
+}

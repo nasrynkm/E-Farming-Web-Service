@@ -1,0 +1,308 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Courier New", Courier, monospace;
+  text-decoration: none;
+}
+
+body {
+  background: #76b852; /* fallback for old browsers */
+  background: rgb(141, 194, 111);
+  background: linear-gradient(
+    90deg,
+    rgba(141, 194, 111, 1) 0%,
+    rgba(118, 184, 82, 1) 50%
+  );
+}
+
+.addContainer {
+  /* background: #76b852; fallback for old browsers */
+  /* background: rgb(141, 194, 111); */
+  background: linear-gradient(
+    90deg,
+    rgba(141, 194, 111, 1) 0%,
+    rgba(118, 184, 82, 1) 50%
+  );
+  box-sizing: border-box;
+  /* display: flex; */
+  padding: 1.5rem 2rem 1.5rem 2rem;
+  border-bottom: 1px solid #ffffff;
+  width: 100%;
+  flex-direction: column;
+  height: auto;
+  position: relative;
+}
+
+.innerAddsContainer {
+  margin: 0px;
+  /* min-width: 0px; */
+  border-radius: 0.45rem;
+  box-shadow: 0 0.5rem 0.95rem rgb(0, 0, 0, 0.2);
+  background: #fff;
+  padding: 2rem;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  z-index: 2;
+}
+
+.componentFlex1 {
+  /* display: flex; */
+  flex: 260 1 0%;
+  flex-direction: column;
+}
+
+.addUserInner {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.addLocation {
+  margin: 1.1rem 0rem 0rem 0;
+  font-size: 0.94rem;
+  font-weight: 300;
+  color: rgb(30, 35, 41);
+}
+
+.componentFlex2 {
+  display: flex;
+  flex: 242 1 0%;
+  /* background: rebeccapurple; */
+}
+
+.addPriceContainer {
+  margin: 0px 0px 12px;
+  display: flex;
+  align-items: baseline;
+  height: 24px;
+  flex-direction: column;
+}
+
+.addPriceRowAlign {
+  display: flex;
+  flex-direction: row;
+  -webkit-box-align: baseline;
+  align-items: baseline;
+}
+
+.hidePrice {
+  display: none;
+  display: flex;
+  flex: 242 1 0%;
+}
+
+.addPrice {
+  margin: 0px 4px 0px 0px;
+  font-size: 1.25rem;
+  color: rgb(11, 14, 17);
+}
+
+.productWeight {
+  margin: 0px 8px 0px 0px;
+  font-size: 0.75rem;
+}
+
+.componentFlex3 {
+  display: flex;
+  flex: 265 1 0%;
+  flex-direction: column;
+}
+
+.align {
+  align-items: baseline;
+  margin-left: 0.1rem;
+}
+
+.amountAvailable {
+  margin: 0px 0px 8px;
+  display: flex;
+  -webkit-box-align: baseline;
+  align-items: baseline;
+  flex-direction: column;
+}
+
+.quantityHeader {
+  margin: 0px 8px 0px 0px;
+  min-width: 50px;
+  color: rgb(112, 122, 138);
+  text-align: left;
+  font-size: 0.75rem;
+}
+
+.limitComponent {
+  display: flex;
+  -webkit-box-align: baseline;
+  align-items: baseline;
+  flex-direction: column;
+}
+
+.limitWrap {
+  direction: ltr;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.weightLimitFlex {
+  display: flex;
+}
+
+.dashLimit {
+  margin: 0px 4px;
+}
+
+.componentFlex4 {
+  min-width: 0px;
+  display: flex;
+  flex: 126 1 0%;
+}
+
+.buttonContainer {
+  min-width: 0px;
+  display: flex;
+  width: 126px;
+  align-items: flex-start;
+}
+
+.buttonComponent {
+  margin: 0px;
+  appearance: none;
+  user-select: none;
+  cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: inline-flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  box-sizing: border-box;
+  font-size: 14px;
+  font-family: inherit;
+  font-weight: 500;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  padding: 6px 12px;
+  line-height: 20px;
+  min-width: 100px;
+  word-break: keep-all;
+  background-color: crimson;
+  color: #ffffff;
+  border-radius: 4px;
+  min-height: 24px;
+  border: none;
+  width: 0px;
+}
+
+.buttonContainer .buttonComponent a {
+  color: #ffffff;
+}
+
+.buttonComponent:hover {
+  background: #61c0b7;
+}
+
+.view {
+  background: orange;
+}
+
+.view:hover {
+  background: #61c0b7;
+}
+
+@media screen and (min-width: 767px) and (max-width: 1600px) {
+  .buttonContainer {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .contact {
+    margin-top: 0.5rem;
+  }
+}
+
+@media screen and (min-width: 1601px) {
+  .view {
+    margin-right: 0.5rem;
+  }
+}
+
+@media screen and (max-width: 766px) {
+  .innerAddsContainer {
+    box-sizing: border-box;
+    margin: 0px;
+    min-width: 0px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border-bottom: 1px solid rgb(234, 236, 239);
+    padding: 1.25rem;
+    background: whitesmoke;
+    border-radius: 0.4rem;
+  }
+
+  .componentFlex1 {
+    flex-direction: row;
+    display: flex;
+    align-items: center;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 1rem;
+  }
+
+  .componentFlex1 .addLocation {
+    margin: 0;
+    float: right;
+    font-size: 0.88rem;
+  }
+
+  .componentFlex2 {
+    /* background: pink; */
+    margin-top: 0.95rem;
+    margin-bottom: 0.1rem;
+  }
+
+  .addPrice {
+    font-size: 1.5rem;
+    font-weight: bold;
+    font-weight: 450;
+  }
+
+  .componentFlex3 {
+    /* background: greenyellow; */
+    margin-top: 0.4rem;
+  }
+
+  .contHeaders {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .quantityHeader {
+    font-size: 0.75rem;
+  }
+
+  .buttonComponent {
+    /* float: right; */
+    margin-top: 0.8rem;
+    align-items: flex-end;
+    width: 112px;
+    margin-left: 0.5rem;
+    float: right;
+  }
+}
+
+@media screen and (max-width: 300px) {
+  .buttonContainer {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .contact {
+    margin-top: 0.5rem;
+  }
+}

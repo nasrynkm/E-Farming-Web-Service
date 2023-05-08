@@ -1,0 +1,212 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Courier New", Courier, monospace;
+  text-decoration: none;
+}
+
+body {
+  background: linear-gradient(
+    90deg,
+    rgba(141, 194, 111, 1) 0%,
+    rgba(118, 184, 82, 1) 50%
+  );
+  font-size: 1.2rem;
+}
+
+/* TOUCHING THE CONTAINER */
+.wrapper {
+  /* background: #fff; */
+  height: 100vh;
+  padding-top: 0.5rem;
+  background: linear-gradient(
+    90deg,
+    rgba(141, 194, 111, 1) 0%,
+    rgba(118, 184, 82, 1) 50%
+  );
+}
+
+/* TOUCHING THE FORM WITH CSS */
+.containerWrapper {
+  background: #ffffff;
+  padding: 1.5rem;
+  max-width: 40rem;
+  border-radius: 1rem;
+  margin: 2.5rem auto 0 auto;
+  box-shadow: 0 0 128px 0 rgba(0, 0, 0, 0.1),
+    0 32px 64px -48px rgba(0, 0, 0, 0.5);
+}
+
+.loginWrap {
+  margin: 3rem auto 0 auto;
+}
+
+.containerWrapper header {
+  font-size: 1.57rem;
+  font-weight: 600;
+  padding-bottom: 0.63rem;
+  border-bottom: 0.063rem solid green;
+}
+
+.containerWrapper form {
+  margin-top: 1rem;
+}
+
+.containerWrapper form .error-text {
+  color: #721c24;
+  background: #f8d7da;
+  padding: 0.5rem 0.63rem;
+  text-align: center;
+  border-radius: 0.32rem;
+  margin-bottom: 0.63rem;
+  border: 0.063rem solid #f5c6cb;
+}
+
+.containerWrapper form .user-details {
+  display: flex;
+}
+
+form .user-details .field:first-child {
+  margin-right: 0.63rem;
+  width: 50%;
+}
+
+form .user-details .field:last-child {
+  margin-left: 0.63rem;
+  width: 50%;
+}
+
+.containerWrapper form .field {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  margin-bottom: 0.63rem;
+}
+
+.containerWrapper form .field label {
+  margin-bottom: 0.2rem;
+}
+
+.containerWrapper form .field input {
+  outline: none;
+}
+
+.containerWrapper form .input input {
+  height: 2.5rem;
+  width: 100%;
+  font-size: 1rem;
+  padding: 0 0.63rem;
+  border: 0.063rem solid #ccc;
+  border-radius: 0.32rem;
+  background: #f2f2f2;
+}
+
+.containerWrapper form .account .acountSelect {
+  padding: 0.58rem;
+  font-size: 1.1rem;
+  width: 50%;
+  border: 0.063rem solid #ccc;
+  outline: none;
+  border-radius: 0.32rem;
+  margin-top: 0.4rem;
+  margin-bottom: 0.3rem;
+  background: #f2f2f2;
+}
+
+.containerWrapper form .image label {
+  margin-top: 0.4rem;
+}
+
+.containerWrapper form .image input {
+  font-size: 1.1rem;
+}
+
+.containerWrapper form .field i {
+  position: absolute;
+  right: 15px;
+  color: #ccc;
+  top: 55%;
+  transform: translate(-50%);
+  cursor: pointer;
+}
+
+.containerWrapper form .field i.active::before {
+  color: #333;
+  content: "\f070";
+}
+
+.containerWrapper form .button input {
+  margin-top: 0.83rem;
+  height: 2.82rem;
+  border: none;
+  font-size: 1.2rem;
+  font-weight: 500;
+  background: #4caf50;
+  color: #ffffff;
+  border-radius: 0.32rem;
+  cursor: pointer;
+}
+
+.containerWrapper form .button input:hover {
+  background: #36e6e6;
+}
+
+.containerWrapper .link {
+  text-align: center;
+  margin: 0.63rem 0;
+  font-size: 1.1rem;
+}
+
+.containerWrapper .link a {
+  color: solid #4caf50;
+}
+
+.containerWrapper .link a:hover {
+  text-decoration: underline;
+  color: solid #4caf50;
+}
+
+@media screen and (max-width: 700px) {
+  .containerWrapper {
+    margin: 1rem 2rem 5rem 2rem;
+  }
+
+  .wrapper {
+    padding-top: 0.94rem;
+    padding-bottom: 1rem;
+    height: 100vh;
+  }
+}
+
+@media screen and (max-width: 445px) {
+  .containerWrapper form .account .acountSelect {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 383px) {
+  .containerWrapper form .user-details {
+    display: block;
+  }
+
+  .containerWrapper form .image input {
+    font-size: 0.85rem;
+  }
+
+  form .user-details .field:first-child {
+    margin-right: auto;
+    width: 100%;
+  }
+
+  form .user-details .field:last-child {
+    margin-left: auto;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 342px) {
+  .containerWrapper form .image input {
+    font-size: 0.88rem;
+  }
+}

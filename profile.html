@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Profile</title>
+    <link rel="stylesheet" href="./css/registation.css" />
+    <link rel="stylesheet" href="./css/footer.css" />
+  </head>
+  <body>
+    <div class="wrapper">
+      <section class="containerWrapper">
+        <header>User Profile</header>
+        <form action="" method="post" enctype="multipart/form-data">
+          <div class="user-details">
+            <div class="field input">
+              <label for="fisrtName">First Name</label>
+              <input type="text" placeholder="First Name" />
+            </div>
+            <div class="field input">
+              <label for="lastName">Last Name</label>
+              <input type="text" placeholder="Last Name" />
+            </div>
+          </div>
+
+          <div class="field input">
+            <label for="lastName">Email Address</label>
+            <input type="text" placeholder="Enter Email" />
+          </div>
+          <div class="field input">
+            <label for="phoneNo">Phone Number</label>
+            <input type="text" placeholder="Phone Number" />
+          </div>
+          <div class="field input">
+            <label for="password">Password</label>
+            <input type="text" placeholder="Enter password" />
+          </div>
+          <div class="account">
+            <select name="accountType" class="acountSelect">
+              <option value="">Acount Type</option>
+              <option value="Farmer">Farmer</option>
+              <option value="Customer">Customer</option>
+            </select>
+          </div>
+          <div class="field image">
+            <label for="profile">Profile Photo</label>
+            <input type="file" />
+          </div>
+
+          <div class="field button">
+            <input type="submit" value="Update" />
+          </div>
+        </form>
+      </section>
+    </div>
+    <!-- STARTING THE FOOTER OF THE PAGE -->
+    <footer class="footer">
+      <div class="footerContainer">
+        <div class="footerRow">
+          <div class="footerColumn">
+            <h4>E-Farming WS</h4>
+            <ul>
+              <li><a href="">About US</a></li>
+              <li><a href="">Services</a></li>
+              <li><a href="">Privacy Policy</a></li>
+            </ul>
+          </div>
+          <div class="footerColumn">
+            <h4>Help</h4>
+            <ul>
+              <li><a href="">Support</a></li>
+              <li><a href="">Feedback</a></li>
+              <li><a href="">Contacts</a></li>
+            </ul>
+          </div>
+          <div class="footerColumn">
+            <h4>Access</h4>
+            <ul>
+              <li><a href="">Adds Section</a></li>
+              <li><a href="../profile.html">User Profile</a></li>
+              <li><a href="">Log Out</a></li>
+            </ul>
+          </div>
+          <div class="footerColumn">
+            <h4>Media</h4>
+            <div class="mediaIcos">
+              <a href=""><i class="fab fa-twitter"></i></a>
+
+              <a href=""><i class="fab fa-facebook-f"></i></a>
+
+              <a href=""><i class="fab fa-instagram"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- ENDING THE FOOTER OF THE PAGE -->
+  </body>
+</html>
