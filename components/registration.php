@@ -2,15 +2,6 @@
 
 session_start();
 
-//Import PHPMailer classes into the global namespace
-//These must be at the top of your script, not inside a function
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
-
-//Load Composer's autoloader
-require 'vendor/autoload.php';
-
 @include './config.php';
 
 if (isset($_POST['submit'])) {
@@ -68,43 +59,6 @@ if (isset($_POST['submit'])) {
 
               if ($query2) {
 
-                // START MAILING A VERIFICATION
-                echo "<div style='display: none;'>";
-
-                //Create an instance; passing `true` enables exceptions
-                $mail = new PHPMailer(true);
-
-                try {
-                  //Server settings
-                  $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
-                  $mail->isSMTP();                                            //Send using SMTP
-                  $mail->Host       = 'smtp.example.com';                     //Set the SMTP server to send through
-                  $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-                  $mail->Username   = 'nasrynkm24@gmail.com';                     //SMTP username
-                  $mail->Password   = 'secret';                               //SMTP password
-                  $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-                  $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-
-                  //Recipients
-                  $mail->setFrom('nasrynkm24@gmail.com', 'Mailer');
-                  $mail->addAddress($email);     //Add a recipient
-
-                  //Content
-                  $mail->isHTML(true);                                  //Set email format to HTML
-                  $mail->Subject = 'E-Farming WeB Service: Verification';
-                  $mail->Body    = 'Copy or Click the link for verification <b><a href="http://localhost/E-Ferming%20Dev/components/login.php/?verify=.'$status'.">http://localhost/E-Ferming%20Dev/components/login.php/?verify=.'$status'.</a></b>';
-
-                  $mail->send();
-                  echo 'Message has been sent';
-
-                } catch (Exception $e) {
-                  $alert_info[] = "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-                }
-                echo "</div>";
-                $alert_success[] = "Verification Link has been sent to your Email";
-
-                // END MAILING A VERIFICATION
-
                 $selecting3 = "SELECT * FROM users WHERE email = '$email'";
                 $query3 = mysqli_query($connection, $selecting3);
 
@@ -113,7 +67,7 @@ if (isset($_POST['submit'])) {
 
                   $row = mysqli_fetch_assoc($query3);
                   $_SESSION['uniqueID'] = $row['uniqueID'];
-                  // $alert_success[] = "Account Registration Successful";
+                  $alert_success[] = "Account Registration Successful";
                 }
               } else {
                 $errorMsg[] = "Something went wrong!";
