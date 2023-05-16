@@ -47,6 +47,11 @@ body {
   z-index: 2;
 }
 
+.addswidth {
+  min-height: 500px;
+  /* background: rebeccapurple; */
+}
+
 .componentFlex1 {
   /* display: flex; */
   flex: 260 1 0%;
@@ -195,6 +200,13 @@ body {
   min-height: 24px;
   border: none;
   width: 0px;
+}
+
+/* WHEN NO ADVERTISEMENTS TO VIEW !! */
+.noContent {
+  text-align: center;
+  margin: auto;
+  /* padding: 30px 50px; */
 }
 
 .buttonContainer .buttonComponent a {

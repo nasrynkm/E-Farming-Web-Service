@@ -13,7 +13,6 @@ if (isset($_POST['submit'])) {
   $location = $_POST['location'];
   $password = $_POST['password'];
   $account = $_POST['accountType'];
-  $status = md5(rand());
 
   if (!empty($fName) && !empty($lName) && !empty($email) && !empty($phone) && !empty($password) && !empty($account)) {
 
@@ -54,7 +53,7 @@ if (isset($_POST['submit'])) {
               // CREATING RANDOM ID FOR EACH USER
               $randomID = rand(time(), 10000000);
 
-              $selecting2 = "INSERT INTO users(uniqueID, firstName, lastName, email, phone, locationed, passwords, account, profilePhoto, vstatus) VALUES($randomID, '$fName', '$lName', '$email', '$phone', '$location', '$password', '$account', '$newImgName', '$status')";
+              $selecting2 = "INSERT INTO users(uniqueID, firstName, lastName, email, phone, locationed, passwords, account, profilePhoto) VALUES($randomID, '$fName', '$lName', '$email', '$phone', '$location', '$password', '$account', '$newImgName')";
               $query2 = mysqli_query($connection, $selecting2);
 
               if ($query2) {

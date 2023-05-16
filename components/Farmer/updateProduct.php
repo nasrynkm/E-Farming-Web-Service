@@ -1,4 +1,12 @@
 <?php
+
+session_start();
+
+if (!isset($_SESSION['uniqueID'])) {
+
+  header("Location: ../login.php");
+}
+
 @include '../config.php';
 
 // WE HAVE TO FETCH AN EDIT ID AFTER USER HAS CLICKED
@@ -44,7 +52,7 @@ if (isset($_POST['updateProduct'])) {
   <title>Update Adds Manager</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="../../css/footer.css" />
-  <link rel="stylesheet" href="../../css/footer.css" />
+  <link rel="stylesheet" href="../../css/addProduct.css" />
   <link rel="stylesheet" href="../../css/dashFarming.css" />
 </head>
 
@@ -110,9 +118,15 @@ if (isset($_POST['updateProduct'])) {
         <div class="footerColumn">
           <h4>Access</h4>
           <ul>
-            <li><a href="./viewAddsFarmer.html">View Adds</a></li>
+            <li><a href="./viewAdds.php">View Adds</a></li>
             <li><a href="../profile.html">User Profile</a></li>
-            <li><a href="">Log Out</a></li>
+
+            <?php
+            $logHook = "SELECT uniqueID FROM users WHERE uniqueID = {$_SESSION['uniqueID']}";
+            $logQ = mysqli_query($connection, $logHook);
+            $logFetch = mysqli_fetch_assoc($logQ);
+            ?>
+            <li><a href="../logout.php?logout_id=<?php echo $logFetch['uniqueID'] ?>">Log Out</a></li>
           </ul>
         </div>
         <div class="footerColumn">

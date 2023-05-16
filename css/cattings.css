@@ -1,0 +1,139 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html body {
+  font-family: "Courier New", Courier, monospace;
+}
+
+.cropContainer {
+  text-align: center;
+  padding-left: 16px;
+  padding-right: 16px;
+  box-shadow: 0px 0px 1px rgba(24, 26, 32, 0.2),
+    0px 3px 6px rgba(71, 77, 87, 0.05), 0px 1px 2px rgba(24, 26, 32, 0.04);
+  z-index: 1;
+  position: sticky;
+  top: 0;
+  background-color: silver;
+}
+
+/* INNER CONTAINER  */
+.cropInnerContainer {
+  display: flex;
+  width: 100%;
+  max-width: 1136px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+  justify-content: space-between;
+  align-items: stretch;
+}
+
+/* INNER-TO-INNER CONTAINER  */
+.cropInnerInnercontainer {
+  display: flex;
+  z-index: 2;
+}
+
+/* MENS ON THE RIGHT FROM LEFT SIDE  */
+.innerDivItems {
+  background: lightblue;
+  display: flex;
+  align-items: stretch;
+}
+
+.firstItem {
+  float: left;
+  user-select: none;
+  clear: both;
+  margin-left: 0;
+  margin-right: 20px;
+}
+
+.allItemsContainer {
+  float: left;
+  user-select: none;
+  margin-left: 0;
+  margin-right: 20px;
+}
+
+/* inner items */
+.allInnerItems {
+  min-width: 0;
+  font-size: 14px;
+  font-weight: 400;
+  text-align: center;
+  height: 40px;
+  line-height: 36px;
+  cursor: pointer;
+  color: #212833;
+}
+
+/* first inner item  */
+.allInnerItems:hover {
+  min-width: 0;
+  font-size: 14px;
+  font-weight: 400;
+  text-align: center;
+  height: 40px;
+  line-height: 36px;
+  cursor: default;
+  /* color: #f0b90b; */
+  border-bottom: 2px solid #f0b90b;
+}
+
+a {
+  text-decoration: none;
+  color: #212833;
+}
+
+input {
+  background: none;
+  border: none;
+}
+
+/* a:hover {
+  color: #f0b90b;
+} */
+
+/* MENUS REPSOINSIVE  */
+@media screen and (min-width: 1023px) {
+  .cropContainer {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+@media screen and (min-width: 767px) {
+  .cropContainer {
+    padding-left: 24px;
+    padding-right: 24px;
+    z-index: 10;
+  }
+}
+
+/* inner items  */
+@media screen and (min-width: 767px) {
+  .allInnerItems {
+    height: 56px;
+    line-height: 58px;
+  }
+}
+
+/* MENUS RESPONSIVE */
+@media screen and (min-width: 1023px) {
+  .firstItem {
+    margin-left: 16px;
+    margin-right: 16px;
+  }
+}
+
+@media screen and (min-width: 767px) {
+  .firstItem {
+    margin-left: 16px;
+    margin-right: 16px;
+  }
+}

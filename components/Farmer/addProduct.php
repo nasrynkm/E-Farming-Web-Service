@@ -1,5 +1,23 @@
 <?php
+
+session_start();
+
+if (!isset($_SESSION['uniqueID'])) {
+
+  header("Location: ../login.php");
+}
+
 @include '../config.php';
+
+//  EXTRACTING USER USING SESSION 
+$query1 = "SELECT uniqueID, profilePhoto FROM users WHERE uniqueID = {$_SESSION['uniqueID']}";
+$checked = mysqli_query($connection, $query1);
+
+// CHECKING & SETTING USER CONTAINER DETAILS IN ARRAY
+if (mysqli_num_rows($checked) > 0) {
+
+  $user = mysqli_fetch_assoc($checked);
+}
 
 
 if (isset($_POST['addProduct'])) {
@@ -9,11 +27,14 @@ if (isset($_POST['addProduct'])) {
   $productQuantity = $_POST['productQuantity'];
   $startLimit = $_POST['sellingLimit'];
   $location = $_POST['userLocation'];
+  $userRef = $_SESSION['uniqueID'];
 
   if (empty($productName) || empty($productPrice) || empty($productQuantity) || empty($startLimit) || empty($location)) {
+
     $alert_warned[] = 'Please Fill Out All Items!';
   } else {
-    $post = "INSERT INTO products(Category, Price, Quantity, StartLimit, Location) VALUES('$productName', '$productPrice', '$productQuantity', '$startLimit', '$location')";
+
+    $post = "INSERT INTO products(Category, Price, Quantity, StartLimit, Location, userRef) VALUES('$productName', '$productPrice', '$productQuantity', '$startLimit', '$location', '$userRef')";
     $posted = mysqli_query($connection, $post);
 
     if ($posted) {
@@ -54,12 +75,12 @@ if (isset($_POST['addProduct'])) {
       <ul id="navigation">
         <li><a href="./farmerDash.php">Dashboard</a></li>
         <li><a class="active" href="./addProduct.php">Adds Manager</a></li>
-        <li><a href="./viewAddsFarmer.html">View Adds</a></li>
-        <li><a href="#">Log Out</a></li>
+        <li><a href="./viewAdds.php">View Adds</a></li>
+        <li><a href="../logout.php?logout_id=<?php echo $user['uniqueID'] ?>">Log Out</a></li>
       </ul>
     </div>
 
-    <a href="../profile.html"><img class="profImg" src="../img/2021-02-00747.jpg" alt="Profile" /></a>
+    <a href="../profile.html"><img class="profImg" src="../uploaded/<?php echo $user['profilePhoto']; ?>" alt="Profile" /></a>
     <div class="toggle-btn">
       <i class="fa-solid fa-bars-staggered"></i>
     </div>
@@ -69,13 +90,13 @@ if (isset($_POST['addProduct'])) {
   <!-- STARTING THE DROP DOWN MENUS -->
   <section>
     <div class="dropMenu">
-      <a href="../profile.html"><img class="profImg" src="../img/2021-02-00747.jpg" alt="Profile" /></a>
+      <a href="../profile.html"><img class="profImg" src="../uploaded/<?php echo $user['profilePhoto']; ?>" alt="Profile" /></a>
 
       <ul>
         <li><a href="./farmerDash.php">Dashboard</a></li>
         <li><a class="active" href="./addProduct.php">Adds Manager</a></li>
         <li><a href="./viewAddsFarmer.html">View Adds</a></li>
-        <li><a href="">Log Out</a></li>
+        <li><a href="../logout.php?logout_id=<?php echo $user['uniqueID'] ?>">Log Out</a></li>
       </ul>
     </div>
   </section>
@@ -127,9 +148,9 @@ if (isset($_POST['addProduct'])) {
         <div class="footerColumn">
           <h4>Access</h4>
           <ul>
-            <li><a href="./viewAddsFarmer.html">Adds Section</a></li>
+            <li><a href="./viewAdds.php">Adds Section</a></li>
             <li><a href="../profile.html">User Profile</a></li>
-            <li><a href="">Log Out</a></li>
+            <li><a href="../logout.php?logout_id=<?php echo $user['uniqueID'] ?>">Log Out</a></li>
           </ul>
         </div>
         <div class="footerColumn">
