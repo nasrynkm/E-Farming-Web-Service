@@ -16,9 +16,10 @@ if (isset($_POST['submit'])) {
 
   if (!empty($fName) && !empty($lName) && !empty($email) && !empty($phone) && !empty($password) && !empty($account)) {
 
-    //CHEKING MAIL VALIDITY AND WHETHER IT EXISTS IN THE DATABASE
+    //CHEKING MAIL VALIDITY 
     if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
 
+      // CHEKING WHETHER MAIL EXISTS IN THE DATABASE
       $selecting = "SELECT email FROM users WHERE email = '$email'";
       $query1 = mysqli_query($connection, $selecting);
 

@@ -59,13 +59,13 @@ if (mysqli_num_rows($checked) > 0) {
           <li><a href="./farmerDash.php">Dashboard</a></li>
           <li><a href="./addProduct.php">Adds Manager</a></li>
           <li><a class="active" href="./viewAdds.php">View Adds</a></li>
-          <li><a href="../logout.php?logout_id=<?php echo $img['uniqueID'] ?>">Log Out</a></li>
+          <li><a href="../logout.php?logout_id=<?php echo $img['uniqueID']; ?>">Log Out</a></li>
           <!-- <input type="text" placeholder="Enter text to search..." /> -->
           <!-- <button><i class="fas fa-search"></i></button> -->
         </ul>
       </div>
 
-      <a href="../profile.html"><img class="profImg" src="../uploaded/<?php echo $img['profilePhoto']; ?>" alt="Profile" /></a>
+      <a href="../profile.php?userID=<?php echo $img['uniqueID']; ?>"><img class="profImg" src="../uploaded/<?php echo $img['profilePhoto']; ?>" alt="Profile" /></a>
       <div class="toggle-btn">
         <i class="fa-solid fa-bars-staggered"></i>
       </div>
@@ -75,14 +75,14 @@ if (mysqli_num_rows($checked) > 0) {
 
     <section>
       <div class="dropMenu">
-        <a href="../profile.html"><img class="profImg" src="../uploaded/<?php echo $img['profilePhoto']; ?>" alt="Profile" /></a>
+        <a href="../profile.php?userID=<?php echo $img['uniqueID']; ?>"><img class="profImg" src="../uploaded/<?php echo $img['profilePhoto']; ?>" alt="Profile" /></a>
 
         <ul>
           <li><a href="./farmerDash.php">Dashboard</a></li>
           <li><a href="./addProduct.php">Adds Manager</a></li>
           <li><a class="active" href="./viewAdds.php">View Adds</a></li>
           <!-- <li><a href="">User Profile</a></li> -->
-          <li><a href="../logout.php?logout_id=<?php echo $img['uniqueID'] ?>">Log Out</a></li>
+          <li><a href="../logout.php?logout_id=<?php echo $img['uniqueID']; ?>">Log Out</a></li>
         </ul>
       </div>
     </section>
@@ -145,7 +145,6 @@ if (mysqli_num_rows($checked) > 0) {
       </div>
     </div>
     <!-- ENDING THE CROP NAVIGATIONS -->
-
 
     <!-- STARTING THE MAIN BODY OF THE DASHBOARD -->
     <section class="addswidth">
@@ -259,7 +258,7 @@ if (mysqli_num_rows($checked) > 0) {
             <h4>Access</h4>
             <ul>
               <li><a href="./viewAdds.php">View Adds</a></li>
-              <li><a href="../profile.html">User Profile</a></li>
+              <li><a href="../profile.php?userID=<?php echo $img['uniqueID']; ?>">Profile</a></li>
               <li><a href="../logout.php?logout_id=<?php echo $img['uniqueID'] ?>">Log Out</a></li>
             </ul>
           </div>

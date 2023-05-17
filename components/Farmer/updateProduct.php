@@ -1,40 +1,42 @@
 <?php
 
 session_start();
-
-if (!isset($_SESSION['uniqueID'])) {
-
-  header("Location: ../login.php");
-}
-
 @include '../config.php';
 
 // WE HAVE TO FETCH AN EDIT ID AFTER USER HAS CLICKED
 // THAT WILL BE USED IN 'WHERE' inside the query
 $fetchProductID = $_GET['edit'];
 
-if (isset($_POST['updateProduct'])) {
+if (!isset($_SESSION['uniqueID']) && !isset($fetchProductID)) {
 
-  $productName = $_POST['productName'];
-  $productPrice = $_POST['productPrice'];
-  $productQuantity = $_POST['productQuantity'];
-  $startLimit = $_POST['sellingLimit'];
-  $location = $_POST['userLocation'];
+  header("Location: ../login.php");
+} else {
+
+  if (isset($_POST['updateProduct'])) {
+
+    $productName = $_POST['productName'];
+    $productPrice = $_POST['productPrice'];
+    $productQuantity = $_POST['productQuantity'];
+    $startLimit = $_POST['sellingLimit'];
+    $location = $_POST['userLocation'];
 
 
-  if (empty($productName) || empty($productPrice) || empty($productQuantity) || empty($startLimit) || empty($location)) {
-    $alert_warned[] = 'Please Fill Out All Items!';
-  } else {
-    $update = "UPDATE products SET Category = '$productName', Price = ' $productPrice', Quantity = '$productQuantity', StartLimit = '$startLimit', Location = '$location' WHERE ID = $fetchProductID";
-    $posted = mysqli_query($connection, $update);
-
-    if ($posted) {
-      $alert_success[] = 'Product Editing Successfully!';
+    if (empty($productName) || empty($productPrice) || empty($productQuantity) || empty($startLimit) || empty($location)) {
+      $alert_warned[] = 'Please Fill Out All Items!';
     } else {
-      $alert_info[] = 'Could not Update the Product!';
+      $update = "UPDATE products SET Category = '$productName', Price = ' $productPrice', Quantity = '$productQuantity', StartLimit = '$startLimit', Location = '$location' WHERE ID = $fetchProductID";
+      $posted = mysqli_query($connection, $update);
+
+      if ($posted) {
+        $alert_success[] = 'Product Editing Successfully!';
+      } else {
+        $alert_info[] = 'Could not Update the Product!';
+      }
     }
   }
 }
+
+
 
 
 ?>
@@ -119,7 +121,7 @@ if (isset($_POST['updateProduct'])) {
           <h4>Access</h4>
           <ul>
             <li><a href="./viewAdds.php">View Adds</a></li>
-            <li><a href="../profile.html">User Profile</a></li>
+            <li><a href="../profile.php?userID=<?php echo $_SESSION['uniqueID']; ?>">User Profile</a></li>
 
             <?php
             $logHook = "SELECT uniqueID FROM users WHERE uniqueID = {$_SESSION['uniqueID']}";

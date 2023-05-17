@@ -34,6 +34,6 @@ if (isset($_SESSION['uniqueID'])) {
         }
     }
 } else {
-    // WHEN NO SESSION AND ONES TO ACCESS THIS PAGE IS DIRECTED TO...
+    // WHEN NO SESSION AND ONE IS TO ACCESS THIS PAGE IS DIRECTED TO...
     header("location: ./login.php");
 }

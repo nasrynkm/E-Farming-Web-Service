@@ -76,11 +76,11 @@ if (isset($_POST['addProduct'])) {
         <li><a href="./farmerDash.php">Dashboard</a></li>
         <li><a class="active" href="./addProduct.php">Adds Manager</a></li>
         <li><a href="./viewAdds.php">View Adds</a></li>
-        <li><a href="../logout.php?logout_id=<?php echo $user['uniqueID'] ?>">Log Out</a></li>
+        <li><a href="../logout.php?logout_id=<?php echo $user['uniqueID']; ?>">Log Out</a></li>
       </ul>
     </div>
 
-    <a href="../profile.html"><img class="profImg" src="../uploaded/<?php echo $user['profilePhoto']; ?>" alt="Profile" /></a>
+    <a href="../profile.php?userID=<?php echo $user['uniqueID']; ?>"><img class="profImg" src="../uploaded/<?php echo $user['profilePhoto']; ?>" alt="Profile" /></a>
     <div class="toggle-btn">
       <i class="fa-solid fa-bars-staggered"></i>
     </div>
@@ -90,12 +90,12 @@ if (isset($_POST['addProduct'])) {
   <!-- STARTING THE DROP DOWN MENUS -->
   <section>
     <div class="dropMenu">
-      <a href="../profile.html"><img class="profImg" src="../uploaded/<?php echo $user['profilePhoto']; ?>" alt="Profile" /></a>
+      <a href="../profile.php?userID=<?php echo $user['uniqueID']; ?>"><img class="profImg" src="../uploaded/<?php echo $user['profilePhoto']; ?>" alt="Profile" /></a>
 
       <ul>
         <li><a href="./farmerDash.php">Dashboard</a></li>
         <li><a class="active" href="./addProduct.php">Adds Manager</a></li>
-        <li><a href="./viewAddsFarmer.html">View Adds</a></li>
+        <li><a href="./viewAdds.php">View Adds</a></li>
         <li><a href="../logout.php?logout_id=<?php echo $user['uniqueID'] ?>">Log Out</a></li>
       </ul>
     </div>
@@ -148,8 +148,8 @@ if (isset($_POST['addProduct'])) {
         <div class="footerColumn">
           <h4>Access</h4>
           <ul>
-            <li><a href="./viewAdds.php">Adds Section</a></li>
-            <li><a href="../profile.html">User Profile</a></li>
+            <li><a href="./viewAdds.php">View Adds</a></li>
+            <li><a href="../profile.php?userID=<?php echo $user['uniqueID'] ?>">Profile</a></li>
             <li><a href="../logout.php?logout_id=<?php echo $user['uniqueID'] ?>">Log Out</a></li>
           </ul>
         </div>
