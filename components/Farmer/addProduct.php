@@ -60,10 +60,11 @@ if (isset($_POST['addProduct'])) {
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Adds Manager</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="../../css/addProduct.css" />
   <link rel="stylesheet" href="../../css/footer.css" />
   <link rel="stylesheet" href="../../css/dashFarming.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD13FeUZZOZmswtOLGnbWCNcCvSGzq7Oh4&libraries=places"></script> -->
 </head>
 
 <body>
@@ -105,19 +106,80 @@ if (isset($_POST['addProduct'])) {
   <!-- MAIN BODY OF ADDS SECTION -->
   <section class="productContainer">
     <div class="productForm">
-      <form action="" method="post">
-        <h3>Add a new agricultural produce</h3>
+      <form method="post" autocomplete="off">
+        <!-- <h3>Add a new agricultural produce</h3> -->
         <select name="productName" class="itemsBox">
           <option value="">Category</option>
-          <option value="maize">Maize</option>
-          <option value="passion">Passion</option>
-          <option value="rice">Rice</option>
-          <option value="banana">Banana</option>
+          <option <?php if (isset($_POST['addProduct'])) {
+                    if ($productName == "Carrots") {
+                      echo 'selected = "selected"';
+                    }
+                  } ?> value="Carrots">Carrots</option>
+
+          <option <?php if (isset($_POST['addProduct'])) {
+                    if ($productName == "Cinnamon") {
+                      echo 'selected = "selected"';
+                    }
+                  } ?> value="Cinnamon">Cinnamon</option>
+
+          <option <?php if (isset($_POST['addProduct'])) {
+                    if ($productName == "Cloves") {
+                      echo 'selected = "selected"';
+                    }
+                  } ?> value="Cloves">Cloves</option>
+
+          <option <?php if (isset($_POST['addProduct'])) {
+                    if ($productName == "Cotton") {
+                      echo 'selected = "selected"';
+                    }
+                  } ?> value="Cotton">Cotton</option>
+          <option <?php if (isset($_POST['addProduct'])) {
+                    if ($productName == "Garlic") {
+                      echo 'selected = "selected"';
+                    }
+                  } ?> value="Garlic">Garlic</option>
+          <option <?php if (isset($_POST['addProduct'])) {
+                    if ($productName == "Onions") {
+                      echo 'selected = "selected"';
+                    }
+                  } ?> value="Onions">Onions</option>
+          <option <?php if (isset($_POST['addProduct'])) {
+                    if ($productName == "Maize") {
+                      echo 'selected = "selected"';
+                    }
+                  } ?> value="Maize">Maize</option>
+          <option <?php if (isset($_POST['addProduct'])) {
+                    if ($productName == "Rice") {
+                      echo 'selected = "selected"';
+                    }
+                  } ?> value="Rice">Rice</option>
+          <option <?php if (isset($_POST['addProduct'])) {
+                    if ($productName == "Wheat") {
+                      echo 'selected = "selected"';
+                    }
+                  } ?> value="Wheat">Wheat</option>
         </select>
-        <input type="decimal" placeholder="Product Price" name="productPrice" class="itemsBox" />
-        <input type="decimal" placeholder="Quantity in Kgs" name="productQuantity" class="itemsBox" />
-        <input type="decimal" placeholder="Start Limit" name="sellingLimit" class="itemsBox" />
-        <input type="text" placeholder="Your Location" name="userLocation" class="itemsBox" />
+        <input type="decimal" placeholder="Product Price" name="productPrice" class="itemsBox" value="<?php if (isset($_POST['addProduct'])) {
+                                                                                                        echo $productPrice;
+                                                                                                      } ?>" />
+        <input type="decimal" placeholder="Quantity in Kgs" name="productQuantity" class="itemsBox" value="<?php if (isset($_POST['addProduct'])) {
+                                                                                                              echo $productQuantity;
+                                                                                                            } ?>" />
+        <input type="decimal" placeholder="Start Limit" name="sellingLimit" class="itemsBox" value="<?php if (isset($_POST['addProduct'])) {
+                                                                                                      echo $startLimit;
+                                                                                                    } ?>" />
+        <input type="text" placeholder="Your Location" name="userLocation" id="location-input" class="itemsBox" value="<?php if (isset($_POST['addProduct'])) {
+                                                                                                                          echo $location;
+                                                                                                                        } ?>" />
+
+        <!-- STARTING YIELD TIME IF ANY USER WANTS TO SET IT -->
+        <!-- <div class="event-form">
+          <label for="title">
+            <p>Estimated</p>
+          </label>
+          <input type="datetime-local" id="event" class="event" />
+        </div> -->
+        <!-- ENDING YIELD TIME IF ANY USER WANTS TO SET IT -->
 
         <input type="submit" class="submittBtn" name="addProduct" value="Post Product" />
       </form>
@@ -170,6 +232,7 @@ if (isset($_POST['addProduct'])) {
 
   <!-- WHERE SCRIPTS STARTS -->
   <script src="../../js/toggleButton.js"></script>
+  <script src="../../js/googlePlaces.js"></script>
 
   <!-- SweetAlert CDN js Link and PhP file -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>

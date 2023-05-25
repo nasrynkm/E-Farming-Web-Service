@@ -1,0 +1,38 @@
+body {
+  position: relative;
+  background-color: silver;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, 50%);
+  background-color: #fff;
+  padding: 2rem;
+  border-top: 2px solid #eaf0f8;
+  box-shadow: 0px 30px 60px #a7b3be, 0px -30px 60px #f8fcff;
+}
+
+.event {
+  /* margin-bottom: 1.53rem; */
+  width: inherit;
+  font-family: inherit;
+  color: black;
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  background-color: #fff;
+  border: 2px solid transparent;
+  border-top: 2px solid transparent;
+  border-radius: 0.5rem;
+  box-shadow: 1px 4px 12px rgb(0, 3, 3, 0.1), -1px -12px 10px #fff;
+  transition: all 250ms ease-in-out;
+  outline: none;
+}
+
+.event-form {
+  display: flex;
+  flex-direction: column;
+}

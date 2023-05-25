@@ -73,7 +73,7 @@ html body {
 }
 
 /* first inner item  */
-.allInnerItems:hover {
+.activeCrop {
   min-width: 0;
   font-size: 14px;
   font-weight: 400;
@@ -81,7 +81,7 @@ html body {
   height: 40px;
   line-height: 36px;
   cursor: default;
-  /* color: #f0b90b; */
+  color: #f0b90b;
   border-bottom: 2px solid #f0b90b;
 }
 

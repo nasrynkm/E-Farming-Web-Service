@@ -4,27 +4,32 @@ session_start();
 if (!isset($_SESSION['uniqueID'])) {
 
   header("Location: ../login.php");
+} else {
+  @include '../config.php';
+
+  // EXTRACTING USER USING SESSION 
+  $query1 = "SELECT * FROM users WHERE uniqueID = {$_SESSION['uniqueID']}";
+  $checked = mysqli_query($connection, $query1);
+
+  // CHECKING & SETTING USER CONTAINER DETAILS IN ARRAY
+  if (mysqli_num_rows($checked) > 0) {
+
+    $user = mysqli_fetch_assoc($checked);
+  }
+
+  if (isset($_GET['delete'])) {
+    $productId = $_GET['delete'];
+    $deleting = "DELETE FROM products WHERE ID = $productId";
+    $deletedProduct = mysqli_query($connection, $deleting);
+
+    if ($deletedProduct) {
+      $alert_success[] = "Product has been Deleted Successfully";
+    } else {
+      $alert_info[] = "Could not! Delete the Prodct";
+    }
+  }
 }
 
-@include '../config.php';
-
-// EXTRACTING USER USING SESSION 
-$query1 = "SELECT * FROM users WHERE uniqueID = {$_SESSION['uniqueID']}";
-$checked = mysqli_query($connection, $query1);
-
-// CHECKING & SETTING USER CONTAINER DETAILS IN ARRAY
-if (mysqli_num_rows($checked) > 0) {
-
-  $user = mysqli_fetch_assoc($checked);
-}
-
-if (isset($_GET['delete'])) {
-  $productId = $_GET['delete'];
-  $deleting = "DELETE FROM products WHERE ID = $productId";
-  mysqli_query($connection, $deleting);
-
-  // header('location: farmerDash.php');
-}
 
 ?>
 
@@ -42,6 +47,7 @@ if (isset($_GET['delete'])) {
   <link rel="stylesheet" href="../../css/footer.css" />
   <link rel="stylesheet" href="../../css/adds.css" />
   <link rel="stylesheet" href="../../css/cattings.css">
+  <link rel="stylesheet" href="../../css/count.css">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
@@ -90,49 +96,49 @@ if (isset($_GET['delete'])) {
       <div class="cropInnerContainer">
         <div class="cropInnerInnercontainer">
           <div class="innerDivItems">
-            <div>
+            <div class="cropJs">
               <div class="firstItem">
-                <a href="">
+                <a onclick="fetchProducts('Carrots', '<?php echo $user['uniqueID'] ?>')">
                   <h2 class="allInnerItems">Carrots</h2>
                 </a>
               </div>
               <div class="allItemsContainer">
-                <a href="#">
+                <a onclick="fetchProducts('Cinnamon', '<?php echo $user['uniqueID'] ?>')">
                   <h2 class="allInnerItems">Cinnamon</h2>
                 </a>
               </div>
               <div class="allItemsContainer">
-                <a href="#">
+                <a onclick="fetchProducts('Cloves', '<?php echo $user['uniqueID'] ?>')">
                   <h2 class="allInnerItems">Cloves</h2>
                 </a>
               </div>
               <div class="allItemsContainer">
-                <a href="#">
+                <a onclick="fetchProducts('Cotton', '<?php echo $user['uniqueID'] ?>')">
                   <h2 class="allInnerItems">Cotton</h2>
                 </a>
               </div>
               <div class="allItemsContainer">
-                <a href="#">
-                  <h2 class="allInnerItems">Garlic</h2>
+                <a onclick="fetchProducts('Garlic', '<?php echo $user['uniqueID'] ?>')">
+                  <h2 class=" allInnerItems">Garlic</h2>
                 </a>
               </div>
               <div class="allItemsContainer">
-                <a href="#">
+                <a onclick="fetchProducts('Onions', '<?php echo $user['uniqueID'] ?>')">
                   <h2 class="allInnerItems">Onions</h2>
                 </a>
               </div>
               <div class="allItemsContainer">
-                <a href="#">
+                <a onclick="fetchProducts('Maize', '<?php echo $user['uniqueID'] ?>')">
                   <h2 class="allInnerItems">Maize</h2>
                 </a>
               </div>
               <div class="allItemsContainer">
-                <a href="#">
+                <a onclick="fetchProducts('Rice', '<?php echo $user['uniqueID'] ?>')">
                   <h2 class="allInnerItems">Rice</h2>
                 </a>
               </div>
               <div class="allItemsContainer">
-                <a href="#">
+                <a onclick="fetchProducts('Wheat', '<?php echo $user['uniqueID'] ?>')">
                   <h2 class="allInnerItems">Wheat</h2>
                 </a>
               </div>
@@ -145,75 +151,6 @@ if (isset($_GET['delete'])) {
 
     <!-- STARTING THE MAIN BODY OF THE DASHBOARD -->
     <section class="addswidth">
-      <?php
-      //FETCHING PRODUCTS CONTENTS
-      $fetch = "SELECT * FROM products WHERE userRef = {$_SESSION['uniqueID']}";
-      $selected = mysqli_query($connection, $fetch);
-
-      while ($row = mysqli_fetch_assoc($selected)) {
-
-      ?>
-        <div class="addContainer">
-          <div class="innerAddsContainer">
-            <!-- Starting the user profile portion -->
-            <div class="componentFlex1 addUserInner">
-              <div><a href="#"> <?php echo $user['firstName'] . " " . $user['lastName'] ?> </a></div>
-              <div>
-                <h5 class="addLocation"><?php echo $row['Location'] ?></h5>
-              </div>
-            </div>
-            <!-- Ending the user profile portion -->
-
-            <!-- Starting the Price portion -->
-            <div class="componentFlex2">
-              <div class="addPriceContainer addPriceRowAlign">
-                <div class="addPrice"><?php echo $row['Price'] ?></div>
-                <div class="productWeight">TZS</div>
-              </div>
-            </div>
-            <!-- Ending the Price portion -->
-
-            <!-- Starting the Quantity Portion -->
-            <div class="componentFlex3">
-              <div class="amountAvailable contHeaders">
-                <div class="quantityHeader">Amount:</div>
-                <div><?php echo $row['Quantity'] ?> KGS</div>
-              </div>
-              <div class="limitComponent contHeaders">
-                <div class="quantityHeader">Limit:</div>
-                <div class="limitWrap">
-                  <div class="weightLimitFlex">
-                    <?php echo $row['StartLimit'] ?>
-                    <div class="align">Kgs</div>
-                  </div>
-                  <div class="dashLimit">-</div>
-                  <div class="weightLimitFlex">
-                    <?php echo $row['Quantity'] ?>
-                    <div class="align">Kgs</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- Ending the Quantity Portion -->
-
-            <!-- Starting the Contact Portion -->
-            <div class="componentFlex4">
-              <div class="buttonContainer">
-                <button type="button" class="buttonComponent view"><a href="updateProduct.php?edit=<?php echo $row['ID'] ?>">Edit</a></button>
-                <button type="button" class="buttonComponent contact"><a href="farmerDash.php?delete=<?php echo $row['ID'] ?>">Delete</a></button>
-              </div>
-            </div>
-          </div>
-        </div>
-        </div>
-
-      <?php }; ?>
-
-      <?php
-      if (mysqli_num_rows($selected) == 0) {
-        echo '<h2 style = "text-align: center; padding: 10% 20%; color: white; width: 100%;">You have no adds to view yet!</h2>';
-      }
-      ?>
 
     </section>
     <!-- ENDING THE MAIN BODY OF THE DASHBOARD -->
@@ -264,6 +201,14 @@ if (isset($_GET['delete'])) {
 
 
   <script src="../../js/toggleButton.js"></script>
+  <script src="../../js/cropMenu.js"></script>
+  <script src="../../js/addsDash.js" defer></script>
+  <!-- <script src="../../js/dateEvent.js"></script> -->
+
+  <!-- SweetAlert CDN js Link and PhP file -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+  <?php @include '../alerts.php'; ?>
+
 </body>
 
 </html>

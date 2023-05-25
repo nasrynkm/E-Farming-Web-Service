@@ -93,9 +93,10 @@ body {
 
 /* ADDING CSS TO THE PROFILE PICTURE */
 .profImg {
-  height: 3.125rem;
-  width: 3.125rem;
+  height: 3.8rem;
+  width: 3.8rem;
   border-radius: 50%;
+  object-fit: cover;
   margin-right: 0.5rem;
 }
 

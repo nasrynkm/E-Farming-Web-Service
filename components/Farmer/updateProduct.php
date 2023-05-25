@@ -15,22 +15,98 @@ if (!isset($_SESSION['uniqueID']) && !isset($fetchProductID)) {
   if (isset($_POST['updateProduct'])) {
 
     $productName = $_POST['productName'];
-    $productPrice = $_POST['productPrice'];
-    $productQuantity = $_POST['productQuantity'];
-    $startLimit = $_POST['sellingLimit'];
-    $location = $_POST['userLocation'];
+    if (!empty($productName)) {
 
+      $updateName = "UPDATE products SET Category = '$productName' WHERE ID = $fetchProductID";
+      $updatedName = mysqli_query($connection, $updateName);
 
-    if (empty($productName) || empty($productPrice) || empty($productQuantity) || empty($startLimit) || empty($location)) {
-      $alert_warned[] = 'Please Fill Out All Items!';
-    } else {
-      $update = "UPDATE products SET Category = '$productName', Price = ' $productPrice', Quantity = '$productQuantity', StartLimit = '$startLimit', Location = '$location' WHERE ID = $fetchProductID";
-      $posted = mysqli_query($connection, $update);
+      if ($updatedName) {
 
-      if ($posted) {
-        $alert_success[] = 'Product Editing Successfully!';
+        $alert_success[] = "Product Category Updated Successfully";
       } else {
-        $alert_info[] = 'Could not Update the Product!';
+
+        $alert_info[] = "Failed! to Update Product Category";
+      }
+    }
+
+    $productPrice = $_POST['productPrice'];
+    if (!empty($productPrice)) {
+
+      $updatePrice = "UPDATE products SET Price = ' $productPrice' WHERE ID = $fetchProductID";
+      $updatedPrice = mysqli_query($connection, $updatePrice);
+
+      if ($updatedPrice) {
+
+        $alert_success[] = "Product Price Updated Successfully";
+      } else {
+
+        $alert_info[] = "Failed! to Update Product Price";
+      }
+    }
+
+    $productQuantity = $_POST['productQuantity'];
+    if (!empty($productQuantity)) {
+
+      $updateQuantity = "UPDATE products SET Quantity = '$productQuantity' WHERE ID = $fetchProductID";
+      $updatedQuantity = mysqli_query($connection, $updateQuantity);
+
+      if ($updatedQuantity) {
+
+        $alert_success[] = "Product Quantity Updated Successfully";
+      } else {
+
+        $alert_info[] = "Failed! to Update Product Quantity";
+      }
+    }
+
+    $startLimit = $_POST['sellingLimit'];
+    if (!empty($startLimit)) {
+
+      $updateStartLimit = "UPDATE products SET StartLimit = '$startLimit' WHERE ID = $fetchProductID";
+      $updatedStartLimit = mysqli_query($connection, $updateStartLimit);
+
+      if ($updatedStartLimit) {
+
+        $alert_success[] = "Start Limit Updated Successfully";
+      } else {
+
+        $alert_info[] = "Failed! to Update Start Limit";
+      }
+    }
+
+    $location = $_POST['userLocation'];
+    if (!empty($location)) {
+
+      $updateLocation = "UPDATE products SET Location = '$location' WHERE ID = $fetchProductID";
+      $updatedLocation = mysqli_query($connection, $updateLocation);
+
+      if ($updatedLocation) {
+        $alert_success[] = "Location Updated Successfully";
+      } else {
+        $alert_info[] = "Failed! to Update Location";
+      }
+    }
+
+    $eventDate = $_POST['dateEvent'];
+    if (!empty($eventDate)) {
+      $updateEventDate = "UPDATE products SET eventDate = '$eventDate' WHERE ID = $fetchProductID";
+      $updatedEventDate = mysqli_query($connection, $updateEventDate);
+
+      if ($updatedEventDate) {
+        $alert_success[] = "Event Date Updated Successfully";
+      } else {
+        $alert_info[] = "Failed! to Update Event Date";
+      }
+    }
+
+    $fetchCategory = "SELECT Category FROM products WHERE ID = $fetchProductID";
+    $fetchedCategory = mysqli_query($connection, $fetchCategory);
+
+    $cat = mysqli_fetch_assoc($fetchedCategory);
+
+    if ($productName == $cat['Category']) {
+      if (empty($productPrice) && empty($productQuantity) && empty($startLimit) && empty($location) && empty($eventDate)) {
+        $alert_info[] = "Nothing has been Updated!";
       }
     }
   }
@@ -65,28 +141,52 @@ if (!isset($_SESSION['uniqueID']) && !isset($fetchProductID)) {
     <div class="productForm">
       <?php
 
-      $fetchItems = mysqli_query($connection, "SELECT * FROM products WHERE ID = $fetchProductID");
+      $fetchingItem = "SELECT * FROM products WHERE ID = $fetchProductID";
+      $fetchedItems = mysqli_query($connection, $fetchingItem);
 
-      while ($row = mysqli_fetch_assoc($fetchItems)) {
+      while ($row = mysqli_fetch_assoc($fetchedItems)) {
       ?>
-        <form action="" method="post">
-          <h3>Update your agricultural produce</h3>
+        <form method="post" autocomplete="off">
+          <!-- <h3>Update agricultural produce</h3> -->
           <select name="productName" class="itemsBox">
             <option value="">Category</option>
 
             <!-- SETTING THE CATEGORY -->
             <?php $optionCat = $row['Category']; ?>
 
-            <option value="Maize" <?php if ($optionCat == "Maize" || $optionCat == "maize") echo 'selected = "selected"'; ?>>Maize</option>
-            <option value="Passion" <?php if ($optionCat == "Passion" || $optionCat == "passion") echo 'selected = "selected"'; ?>>Passion</option>
-            <option value="Rice" <?php if ($optionCat == "Rice" || $optionCat == "rice") echo 'selected = "selected"'; ?>>Rice</option>
-            <option value="Banana" <?php if ($optionCat == "Banana" || $optionCat == "banana") echo 'selected = "selected"'; ?>>Banana</option>
+            <option value="Carrots" <?php if ($optionCat == "Carrots") echo 'selected = "selected"'; ?>>Carrots</option>
+            <option value="Cinnamon" <?php if ($optionCat == "Cinnamon") echo 'selected = "selected"'; ?>>Cinnamon</option>
+            <option value="Cloves" <?php if ($optionCat == "Cloves") echo 'selected = "selected"'; ?>>Cloves</option>
+            <option value="Cotton" <?php if ($optionCat == "Cotton") echo 'selected = "selected"'; ?>>Cotton</option>
+            <option value="Garlic" <?php if ($optionCat == "Garlic") echo 'selected = "selected"'; ?>>Garlic</option>
+            <option value="Onions" <?php if ($optionCat == "Onions") echo 'selected = "selected"'; ?>>Onions</option>
+            <option value="Maize" <?php if ($optionCat == "Maize") echo 'selected = "selected"'; ?>>Maize</option>
+            <option value="Rice" <?php if ($optionCat == "Rice") echo 'selected = "selected"'; ?>>Rice</option>
+            <option value="Wheat" <?php if ($optionCat == "Wheat") echo 'selected = "selected"'; ?>>Wheat</option>
+
 
           </select>
-          <input type="decimal" placeholder="Product Price" value="<?php echo $row['Price']; ?>" name="productPrice" class="itemsBox" />
-          <input type="decimal" placeholder="Quantity" value="<?php echo $row['Quantity']; ?>" name="productQuantity" class="itemsBox" />
-          <input type="decimal" placeholder="Selling Limit" value="<?php echo $row['StartLimit']; ?>" name="sellingLimit" class="itemsBox" />
-          <input type="text" placeholder="Your Location" value="<?php echo $row['Location']; ?>" name="userLocation" class="itemsBox" />
+          <input type="decimal" placeholder="<?php echo $row['Price']; ?>" name="productPrice" class="itemsBox" />
+          <input type="decimal" placeholder="<?php echo $row['Quantity']; ?>" name="productQuantity" class="itemsBox" />
+          <input type="decimal" placeholder="<?php echo $row['StartLimit']; ?>" name="sellingLimit" class="itemsBox" />
+          <input type="text" placeholder="<?php echo $row['Location']; ?>" name="userLocation" class="itemsBox" />
+
+          <!-- STARTING YIELD TIME IF ANY USER WANTS TO SET IT -->
+          <div class="event-form">
+            <label for="title">
+              <p>Estimated</p>
+            </label>
+
+            <?php
+            $eventDate = $row['eventDate']; // Get the event date from $row
+
+            $formattedDateTime = date('d/m/Y H:i:s', strtotime($eventDate)); // Format the date and time as dd/mm/yyyy HH:ii:ss
+            ?>
+
+            <input type="datetime-local" name="dateEvent" id="event" class="event" value="<?php echo $formattedDateTime; ?>" />
+          </div>
+          <!-- ENDING YIELD TIME IF ANY USER WANTS TO SET IT -->
+
           <input type="submit" class="submittBtn" name="updateProduct" value="Update" />
           <a href="./farmerDash.php" class="submittBtn">Go Back</a>
         </form>
@@ -121,7 +221,7 @@ if (!isset($_SESSION['uniqueID']) && !isset($fetchProductID)) {
           <h4>Access</h4>
           <ul>
             <li><a href="./viewAdds.php">View Adds</a></li>
-            <li><a href="../profile.php?userID=<?php echo $_SESSION['uniqueID']; ?>">User Profile</a></li>
+            <li><a href="../profile.php?userID=<?php echo $_SESSION['uniqueID']; ?>">Profile</a></li>
 
             <?php
             $logHook = "SELECT uniqueID FROM users WHERE uniqueID = {$_SESSION['uniqueID']}";

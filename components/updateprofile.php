@@ -22,87 +22,185 @@ if (isset($_SESSION['uniqueID']) && isset($userID)) {
   if (isset($_POST['submit'])) {
 
     $fName = $_POST['fName'];
+    if (!empty($fName)) {
+
+      $updatefName = "UPDATE users SET firstName = '$fName' WHERE uniqueID = $userID";
+      $updatedfName = mysqli_query($connection, $updatefName);
+
+      if ($updatedfName) {
+
+        $alert_success[] = "First Name Updated Successfully";
+      } else {
+
+        $alert_info[] = "Failed! to Update First Name";
+      }
+    }
+
     $lName = $_POST['lName'];
+    if (!empty($lName)) {
+
+      $updatelName = "UPDATE users SET firstName = '$lName' WHERE uniqueID = $userID";
+      $updatedlName = mysqli_query($connection, $updatelName);
+
+      if ($updatedlName) {
+
+        $alert_success[] = "Last Name Updated Successfully";
+      } else {
+
+        $alert_info[] = "Failed! to Update Last Name";
+      }
+    }
+
     $email = $_POST['email'];
-    $phone = $_POST['phone'];
-    $location = $_POST['locations'];
-    $oldPassword = $_POST['oldPassword'];
-    $newPassword = $_POST['newPassword'];
+    if (!empty($email)) {
 
-    if (!empty($fName) && !empty($lName) && !empty($email) && !empty($phone) && !empty($oldPassword) && !empty($newPassword)) {
-
-      //CHEKING MAIL VALIDITY AND WHETHER IT EXISTS IN THE DATABASE
       if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
 
         // CHEKING WHETHER MAIL EXISTS IN THE DATABASE
-        $selecting = "SELECT email FROM users WHERE email = '$email' AND  NOT uniqueID = $userID";
-        $query2 = mysqli_query($connection, $selecting);
+        $selectMail = "SELECT email FROM users WHERE email = '$email' AND  NOT uniqueID = $userID";
+        $queryMail = mysqli_query($connection, $selectMail);
 
         //CHECKING EMAIL IF EXISTS IN THE DATABASE
-        if (mysqli_num_rows($query2) > 0) {
+        if (mysqli_num_rows($queryMail) > 0) {
 
-          $errorMsg[] = "$email already exists";
+          $alert_warned[] = "$email Already Exists";
         } else {
-          if (isset($_FILES['image'])) {
 
-            //SPLITITNG THE IMAGE BLOCK UPLOADED BY THE USER
-            $imgName = $_FILES['image']['name'];
-            $imgType = $_FILES['image']['type'];
-            $tmpName = $_FILES['image']['tmp_name'];
+          $updateMail = "UPDATE users SET email = '$email' WHERE uniqueID = $userID";
+          $updatedMail = mysqli_query($connection, $updateMail);
 
-            //DIVIDING IMAGE PARTS AND GETTING THE EXTENSIONS 
-            $imgExplode = explode('.', $imgName);
-            $imgExtension = end($imgExplode);
+          if ($updatedMail) {
 
-            //SETTING A POOL OF EXTENSIONS 
-            $extensions = ['png', 'jpeg', 'jpg'];
-
-            if (in_array($imgExtension, $extensions) === true) { //CHECKING EXTENSION VALIDITY
-              $time = time(); //GETTING TIMESTAMP
-
-              //ASSIGNING NEW IMAGE NAME WITH TIME OBTAINED .. THEN UPLOADING
-              $newImgName = $time . $imgName;
-              $targetDir = "uploaded/";
-
-              if (move_uploaded_file($tmpName, $targetDir . $newImgName)) {
-
-                if ($oldPassword == $user['passwords']) {
-                  // $updateImg = "UPDATE users SET profilePhoto = '$newImgName' WHERE uniqueID = $userID";
-                  // $doneUpdatingImg = mysqli_query($connection, $updateImg);
-
-                  // SENDING NEW DATA TO THE DATABASE TABLE
-                  $selecting3 = "UPDATE users SET firstName = '$fName', lastName = '$lName', email = '$email', phone = '$phone', locationed = '$location', passwords = '$newPassword', profilePhoto = '$newImgName' WHERE uniqueID = $userID";
-                  $query3 = mysqli_query($connection, $selecting3);
-
-                  if ($query3) {
-                    $alert_success[] = "Profile Updated Successful";
-                  } else {
-                    $alert_info[] = "Something went wrong!";
-                  }
-                } else {
-                  $errorMsg[] = "Incorrect Old Password!";
-                }
-              } else {
-                $errorMsg[] = "Image not uploaded";
-              }
-            } else {
-              $errorMsg[] = "Image should be a jepg, jpg, png";
-            }
+            $alert_success[] = "Email Updated Successfully";
           } else {
-            $errorMsg[] = "Please select an image file";
+
+            $alert_info[] = "Failed! to Update Email";
           }
         }
       } else {
-        $errorMsg[] = "$email is an invalid email";
+
+        $alert_error[] = "$email is an Invalid Email";
       }
-    } else {
-      $errorMsg[] = "All fields are required!";
+    }
+
+    $phone = $_POST['phone'];
+    if (!empty($phone)) {
+
+      $updatePhone = "UPDATE users SET phone = '$phone' WHERE uniqueID = $userID";
+      $updatedPhone = mysqli_query($connection, $updatePhone);
+
+      if ($updatedPhone) {
+        $alert_success[] = "Phone Number Updated Successfully";
+      } else {
+        $alert_info[] = "Failed! to Update Phone Number";
+      }
+    }
+
+    $location = $_POST['locations'];
+    if (!empty($location)) {
+
+      $updateLocation = "UPDATE users SET locationed = '$location' WHERE uniqueID = $userID";
+      $updatedLocation = mysqli_query($connection, $updateLocation);
+
+      if ($updatedLocation) {
+        $alert_success[] = "Location Updated Successfully";
+      } else {
+        $alert_info[] = "Failed! to Update Location";
+      }
+    }
+
+    $oldPassword = $_POST['oldPassword'];
+    $newPassword = $_POST['newPassword'];
+    if (!empty($newPassword)) {
+      if ($oldPassword == $user['passwords']) {
+
+        $updatePassword = "UPDATE users SET passwords = '$newPassword' WHERE uniqueID = $userID";
+        $updatedPassword = mysqli_query($connection, $updatePassword);
+
+        if ($updatedPassword) {
+          $alert_success[] = "New Password Updated Successfully";
+        } else {
+          $alert_info[] = "Failed! to Update New Password";
+        }
+      } else {
+        $alert_error[] = "Old Password is Incorrect!";
+      }
+    }
+
+
+    if (isset($_FILES['image'])) {
+      //SPLITITNG THE IMAGE BLOCK UPLOADED BY THE USER
+      $imgName = $_FILES['image']['name'];
+      $imgType = $_FILES['image']['type'];
+      $imgSize = $_FILES['image']['size'];
+      $tmpName = $_FILES['image']['tmp_name'];
+
+      //DIVIDING IMAGE PARTS AND GETTING THE EXTENSIONS 
+      $imgExplode = explode('.', $imgName);
+      $imgExtension = end($imgExplode);
+
+      $time = time(); //GETTING TIMESTAMP
+
+      //ASSIGNING NEW IMAGE NAME WITH TIME OBTAINED .. THEN UPLOADING
+      $newImgName = $time . $imgName;
+      $targetDir = "uploaded/";
+
+      //SETTING A POOL OF EXTENSIONS 
+      $extensions = ['png', 'jpeg', 'jpg'];
+
+      if (!empty($imgName)) {
+
+        if ($imgSize > 5000000) {
+
+          $alert_warned[] = "Image Size is too large!";
+        } else {
+
+          if (in_array($imgExtension, $extensions) === true) { //CHECKING EXTENSION VALIDITY
+
+            $updateImage = "UPDATE users SET profilePhoto = '$newImgName' WHERE uniqueID = $userID";
+            $updatedImage = mysqli_query($connection, $updateImage);
+
+            if ($updatedImage) {
+
+              if ($user['profilePhoto']) {
+
+                unlink("uploaded/" . $user['profilePhoto']);
+
+                if (move_uploaded_file($tmpName, $targetDir . $newImgName)) {
+
+                  $alert_success[] = "Image Updated Successfully";
+                } else {
+
+                  $alert_warned[] = "Failed! to Upload Image";
+                }
+              } else {
+                if (move_uploaded_file($tmpName, $targetDir . $newImgName)) {
+                  $alert_success[] = "Image Updated Successfully";
+                } else {
+
+                  $alert_warned[] = "Failed! to Upload Image";
+                }
+              }
+            } else {
+              $alert_warned[] = "Failed! to Update Image";
+            }
+          } else {
+
+            $alert_warned[] = "Image Should Be jepg, jpg, png";
+          }
+        }
+      }
+    }
+
+    if (empty($fName) && empty($lName) && empty($email) && empty($phone) && empty($location) && empty($oldPassword) && empty($newPassword) && empty($imgName)) {
+      $alert_info[] = "Nothing has been Updated!";
     }
   }
 } else {
   // WHEN NO SESSION AND ONE IS TO ACCESS THIS PAGE IS DIRECTED TO...
   header("Location: ./login.php");
 }
+
 
 
 ?>
@@ -135,46 +233,62 @@ if (isset($_SESSION['uniqueID']) && isset($userID)) {
         }
         ?>
 
-        <div class="user-details">
-          <div class="field input">
-            <label for="fisrtName">First Name</label>
-            <input type="text" name="fName" placeholder="First Name" value="<?php echo $user['firstName']; ?>" />
-          </div>
-          <div class="field input">
-            <label for="lastName">Last Name</label>
-            <input type="text" name="lName" placeholder="Last Name" value="<?php echo $user['lastName']; ?>" />
-          </div>
-        </div>
+        <?php
+        // EXTRACTING USER USING SESSION 
+        $queryAllDetails = "SELECT * FROM users WHERE uniqueID = $userID";
+        $queryDetails = mysqli_query($connection, $queryAllDetails);
 
-        <div class="field input">
-          <label for="lastName">Email Address</label>
-          <input type="text" name="email" placeholder="Enter Email" value="<?php echo $user['email']; ?>" />
-        </div>
-        <div class="field input">
-          <label for="phoneNo">Phone Number</label>
-          <input type="text" name="phone" placeholder="Phone Number" value="<?php echo $user['phone']; ?>" />
-        </div>
-        <div class="field input">
-          <label for="password">Location</label>
-          <input type="text" name="locations" placeholder="Location" value="<?php echo $user['locationed']; ?>" />
-        </div>
-        <div class="field input">
-          <label for="password">Old password</label>
-          <input type="text" name="oldPassword" placeholder="Old password" />
-        </div>
-        <div class="field input">
-          <label for="confirmPassword">New Password</label>
-          <input type="password" name="newPassword" placeholder="New password" />
-          <i class="fas fa-eye"></i>
-        </div>
-        <div class="field image">
-          <label for="profile">Profile Photo</label>
-          <input type="file" name="image" />
-        </div>
+        // CHECKING & SETTING USER CONTAINER DETAILS IN ARRAY
+        if (mysqli_num_rows($queryDetails) > 0) {
 
-        <div class="field button">
-          <input type="submit" name="submit" value="Update" />
-        </div>
+          while ($items = mysqli_fetch_assoc($queryDetails)) {
+        ?>
+            <div class="user-details">
+              <div class="field input">
+                <label for="fisrtName">First Name</label>
+                <input type="text" name="fName" placeholder="<?php echo $items['firstName']; ?>" />
+              </div>
+              <div class="field input">
+                <label for="lastName">Last Name</label>
+                <input type="text" name="lName" placeholder="<?php echo $items['lastName']; ?>" />
+              </div>
+            </div>
+
+            <div class="field input">
+              <label for="lastName">Email Address</label>
+              <input type="text" name="email" placeholder="<?php echo $items['email']; ?>" />
+            </div>
+            <div class="field input">
+              <label for="phoneNo">Phone Number</label>
+              <input type="text" name="phone" placeholder="<?php echo $items['phone']; ?>" />
+            </div>
+            <div class="field input">
+              <label for="password">Location</label>
+              <input type="text" name="locations" placeholder="<?php echo $items['locationed']; ?>" />
+            </div>
+            <div class="field input">
+              <label for="password">Old password</label>
+              <input type="text" name="oldPassword" placeholder="Old password" />
+            </div>
+            <div class="field input">
+              <label for="confirmPassword">New Password</label>
+              <input type="password" name="newPassword" placeholder="New password" />
+              <i class="fas fa-eye"></i>
+            </div>
+            <div class="field image">
+              <label for="profile">Profile Photo</label>
+              <input type="file" name="image" />
+            </div>
+
+            <div class="field button">
+              <input type="submit" name="submit" value="Update" />
+            </div>
+
+        <?php };
+        } else {
+          $alert_info[] = "Nothing was found!";
+        }
+        ?>
       </form>
     </section>
   </div>

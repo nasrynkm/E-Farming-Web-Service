@@ -123,7 +123,7 @@ if (mysqli_num_rows($checked) > 0) {
       </div>
 
       <!-- CONTAINER 05 -->
-      <div class="containerTips containerLeft">
+      <!-- <div class="containerTips containerLeft">
         <img src="../uploaded/<?php echo $user['profilePhoto'] ?>" alt="icon" />
         <div class="textBox">
           <h2>E-Farming WS</h2>
@@ -132,7 +132,7 @@ if (mysqli_num_rows($checked) > 0) {
           </p>
           <span class="leftArrow"></span>
         </div>
-      </div>
+      </div> -->
 
     </section>
 

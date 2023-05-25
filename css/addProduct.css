@@ -22,7 +22,7 @@ body {
 }
 
 .productForm form {
-  max-width: 50rem;
+  max-width: 40rem;
   margin: 3rem auto;
   padding: 2rem;
   border-radius: 0.5rem;
@@ -41,12 +41,41 @@ body {
 .productForm form .itemsBox {
   outline: none;
   width: 100%;
-  border-radius: 0.5rem;
-  border: none;
-  background: #f2f2f2;
-  padding: 1rem 1.2rem;
-  font-size: 1.5rem;
+  border-radius: 0.3rem;
+  padding: 0.8rem;
+  font-size: 1.3rem;
   margin: 0.5rem 0;
+  /* after v01 */
+  color: black;
+  background-color: #fff;
+  border: 2px solid transparent;
+  border-top: 2px solid transparent;
+  /* box-shadow: 1px 4px 12px rgb(0, 3, 3, 0.1), -1px -12px 10px #fff; */
+  box-shadow: 0px -1px 10.4px rgb(0, 3, 3, 0.1), 1px -1px 1px grey;
+  transition: all 250ms ease-in-out;
+}
+
+.event {
+  margin-top: 0.8rem;
+  width: 100%;
+  color: black;
+  padding: 0.8rem;
+  font-size: 1rem;
+  background-color: #fff;
+  border: 2px solid transparent;
+  border-top: 2px solid transparent;
+  border-radius: 0.5rem;
+  /* box-shadow: 1px 4px 12px rgb(0, 3, 3, 0.1), -1px -12px 10px #fff; */
+  box-shadow: 0px 1px 9px rgb(0, 3, 3, 0.1), -1px 1px 0px grey;
+  /* box-shadow: 1.4px 3px 9.1px rgb(0, 3, 3, 0.1), 0.4px 0.4px 0.4px gray; */
+  transition: all 250ms ease-in-out;
+  outline: none;
+}
+
+.event-form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
 }
 
 .submittBtn {
@@ -93,7 +122,7 @@ body {
 
 @media (max-width: 360px) {
   .productForm form .itemsBox {
-    font-size: 1.26rem;
+    font-size: 1.18rem;
   }
 }
 

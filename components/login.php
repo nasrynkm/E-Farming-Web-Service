@@ -33,15 +33,15 @@ if (isset($_POST['submit'])) {
         // $alert_success[] = "Log in Successful";
       } else {
 
-        $errorMsg[] = "Email or Password are incorrect!";
+        $alert_error[] = "Email or Password is Incorrect!";
       }
     } else {
 
-      $errorMsg[] =  "$mail is an invalid Email";
+      $alert_error[] =  "$mail is an Invalid Email";
     }
   } else {
 
-    $errorMsg[] = "All fields are required!";
+    $alert_warned[] = "All fields are Required!";
   }
 }
 

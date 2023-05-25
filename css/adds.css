@@ -115,7 +115,7 @@ body {
   flex-direction: column;
 }
 
-.align {
+.alignKgs {
   align-items: baseline;
   margin-left: 0.1rem;
 }

@@ -36,6 +36,7 @@ if (isset($_SESSION['uniqueID']) && isset($userID)) {
   <link rel="stylesheet" href="../css/registation.css" />
   <link rel="stylesheet" href="../css/addProduct.css" />
   <link rel="stylesheet" href="../css/footer.css" />
+  <link rel="stylesheet" href="../css/dashFarming.css">
 </head>
 
 <body>
@@ -90,8 +91,9 @@ if (isset($_SESSION['uniqueID']) && isset($userID)) {
           </select>
         </div>
         <div class="field image">
-          <label for="profile">Profile Photo</label>
-          <input type="file" name=" <?php echo $user['profilePhoto']; ?>" />
+          <!-- <label for="profile">Profile Photo</label>
+          <input type="file" name=" <?php echo $user['profilePhoto']; ?>" /> -->
+          <!-- <img class="profImg" src="./uploaded/<?php echo $user['profilePhoto'] ?>" alt="Profile" /> -->
         </div>
 
         <div><a class="submittBtn" href="./updateprofile.php?userID=<?php echo $user['uniqueID']; ?>">Edit</a></div>

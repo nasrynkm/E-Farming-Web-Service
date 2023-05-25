@@ -26,7 +26,7 @@ if (isset($_POST['submit'])) {
       //CHECKING EMAIL IF EXISTS IN THE DATABASE
       if (mysqli_num_rows($query1) > 0) {
 
-        $errorMsg[] = "$email already exists";
+        $alert_warned[] = "$email Already Exists";
       } else {
         if (isset($_FILES['image'])) {
 
@@ -70,23 +70,23 @@ if (isset($_POST['submit'])) {
                   $alert_success[] = "Account Registration Successful";
                 }
               } else {
-                $errorMsg[] = "Something went wrong!";
+                $alert_info[] = "Something went wrong!";
               }
             } else {
-              $errorMsg[] = "Image not uploaded";
+              $alert_info[] = "Image not uploaded";
             }
           } else {
-            $errorMsg[] = "Image should be a jepg, jpg, png";
+            $alert_warned[] = "Image Should Be jepg, jpg, png";
           }
         } else {
-          $errorMsg[] = "Please select an image file";
+          $alert_error[] = "Please Select an Image File";
         }
       }
     } else {
-      $errorMsg[] = "$email is an invalid email";
+      $alert_error[] = "$email is an Invalid Email";
     }
   } else {
-    $errorMsg[] = "All fields are required!";
+    $alert_warned[] = "All Fields are Required!";
   }
 }
 
@@ -150,9 +150,9 @@ if (isset($_POST['submit'])) {
         </div>
         <div class="field input">
           <label for="location">Location</label>
-          <input type="text" name="location" placeholder="Enter location" value="<?php if (isset($_POST['submit'])) {
-                                                                                    echo $location;
-                                                                                  } ?>" />
+          <input type="text" name="location" placeholder="Enter location" id="location-input" value="<?php if (isset($_POST['submit'])) {
+                                                                                                        echo $location;
+                                                                                                      } ?>" />
         </div>
         <div class="field input">
           <label for="password">Password</label>
@@ -196,6 +196,7 @@ if (isset($_POST['submit'])) {
   </div>
 
   <script src="../js/hideShowPassword.js"></script>
+  <script src="../../js/googlePlaces.js"></script>
 
   <!-- SweetAlert CDN js Link and PhP file -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>

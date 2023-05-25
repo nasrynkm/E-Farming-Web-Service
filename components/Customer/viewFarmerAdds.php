@@ -33,6 +33,7 @@ if (mysqli_num_rows($checked) > 0) {
     <link rel="stylesheet" href="../../css/footer.css" />
     <link rel="stylesheet" href="../../css/adds.css">
     <link rel="stylesheet" href="../../css/cattings.css">
+    <link rel="stylesheet" href="../../css/count.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
@@ -89,49 +90,49 @@ if (mysqli_num_rows($checked) > 0) {
             <div class="cropInnerContainer">
                 <div class="cropInnerInnercontainer">
                     <div class="innerDivItems">
-                        <div>
+                        <div class="cropJs">
                             <div class="firstItem">
-                                <a href="">
+                                <a onclick="fetchProducts('Carrots')">
                                     <h2 class="allInnerItems">Carrots</h2>
                                 </a>
                             </div>
                             <div class="allItemsContainer">
-                                <a href="#">
+                                <a onclick="fetchProducts('Cinnamon')">
                                     <h2 class="allInnerItems">Cinnamon</h2>
                                 </a>
                             </div>
                             <div class="allItemsContainer">
-                                <a href="#">
+                                <a onclick="fetchProducts('Cloves')">
                                     <h2 class="allInnerItems">Cloves</h2>
                                 </a>
                             </div>
                             <div class="allItemsContainer">
-                                <a href="#">
+                                <a onclick="fetchProducts('Cotton')">
                                     <h2 class="allInnerItems">Cotton</h2>
                                 </a>
                             </div>
                             <div class="allItemsContainer">
-                                <a href="#">
-                                    <h2 class="allInnerItems">Garlic</h2>
+                                <a onclick="fetchProducts('Garlic')">
+                                    <h2 class=" allInnerItems">Garlic</h2>
                                 </a>
                             </div>
                             <div class="allItemsContainer">
-                                <a href="#">
+                                <a onclick="fetchProducts('Onions')">
                                     <h2 class="allInnerItems">Onions</h2>
                                 </a>
                             </div>
                             <div class="allItemsContainer">
-                                <a href="#">
+                                <a onclick="fetchProducts('Maize')">
                                     <h2 class="allInnerItems">Maize</h2>
                                 </a>
                             </div>
                             <div class="allItemsContainer">
-                                <a href="#">
+                                <a onclick="fetchProducts('Rice')">
                                     <h2 class="allInnerItems">Rice</h2>
                                 </a>
                             </div>
                             <div class="allItemsContainer">
-                                <a href="#">
+                                <a onclick="fetchProducts('Wheat')">
                                     <h2 class="allInnerItems">Wheat</h2>
                                 </a>
                             </div>
@@ -144,84 +145,6 @@ if (mysqli_num_rows($checked) > 0) {
 
         <!-- STARTING THE MAIN BODY OF THE DASHBOARD -->
         <section class="addswidth">
-            <?php
-            //FETCHING PRODUCTS CONTENTS
-            $fetch = "SELECT * FROM products";
-            $selected = mysqli_query($connection, $fetch);
-
-            while ($row = mysqli_fetch_assoc($selected)) {
-
-            ?>
-
-                <div class="addContainer">
-                    <div class="innerAddsContainer">
-                        <!-- Starting the user profile portion -->
-                        <div class="componentFlex1 addUserInner">
-                            <div>
-                                <a href="#"><?php
-                                            $names = "SELECT firstName, lastName FROM users WHERE uniqueID = {$row['userRef']}";
-                                            $qnames = mysqli_query($connection, $names);
-                                            $nameContainer = mysqli_fetch_assoc($qnames);
-                                            echo $nameContainer['firstName'] . " " . $nameContainer['lastName'];
-                                            ?>
-                                </a>
-                            </div>
-                            <div>
-                                <h5 class="addLocation"><?php echo $row['Location']; ?></h5>
-                            </div>
-                        </div>
-                        <!-- Ending the user profile portion -->
-
-                        <!-- Starting the Price portion -->
-                        <div class="componentFlex2">
-                            <div class="addPriceContainer addPriceRowAlign">
-                                <div class="addPrice"><?php echo $row['Price']; ?></div>
-                                <div class="productWeight">TZS</div>
-                            </div>
-                        </div>
-                        <!-- Ending the Price portion -->
-
-                        <!-- Starting the Quantity Portion -->
-                        <div class="componentFlex3">
-                            <div class="amountAvailable contHeaders">
-                                <div class="quantityHeader">Amount:</div>
-                                <div><?php echo $row['Quantity']; ?> KGS</div>
-                            </div>
-                            <div class="limitComponent contHeaders">
-                                <div class="quantityHeader">Limit:</div>
-                                <div class="limitWrap">
-                                    <div class="weightLimitFlex">
-                                        <?php echo $row['StartLimit']; ?>
-                                        <div class="align">Kgs</div>
-                                    </div>
-                                    <div class="dashLimit">-</div>
-                                    <div class="weightLimitFlex">
-                                        <?php echo $row['Quantity']; ?>
-                                        <div class="align">Kgs</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Ending the Quantity Portion -->
-
-                        <!-- Starting the Contact Portion -->
-                        <div class="componentFlex4">
-                            <div class="buttonContainer">
-                                <button type="button" class="buttonComponent view">Track</button>
-                                <button type="button" class="buttonComponent contact">Contact</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                </div>
-
-            <?php }; ?>
-
-            <?php
-            if (mysqli_num_rows($selected) == 0) {
-                echo '<h2 style = "text-align: center; padding: 10% 20%; color: white; width: 100%;">There are no adds to view yet!</h2>';
-            }
-            ?>
 
         </section>
         <!-- ENDING THE MAIN BODY OF THE DASHBOARD -->
@@ -269,7 +192,13 @@ if (mysqli_num_rows($checked) > 0) {
         </footer>
     </section>
 
-    <script src="../../js/toggleButton.js"></script>
+    <script src="../../js/toggleButton.js" async></script>
+    <script src="../../js/cropMenu.js" async></script>
+    <script src="../../js/adds.js" defer></script>
+
+    <!-- <script src="../../js/addsDash.js" defer></script> -->
+
+
 </body>
 
 </html>

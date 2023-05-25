@@ -1,0 +1,111 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Courier New", Courier, monospace;
+}
+
+.componentFlex3 {
+  display: flex;
+  flex: 265 1 0%;
+  flex-direction: column;
+}
+
+.align {
+  align-items: center;
+  /* margin-left: -0.6rem; */
+}
+
+#time {
+  display: flex;
+  gap: 1px;
+}
+
+#time .circle {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#time .circle svg {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  transform: rotate(270deg);
+}
+
+#time div.circle svg circle {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  fill: transparent;
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke: #565252;
+  transform: translate(3px, 3px);
+}
+
+#time div.circle svg circle:nth-child(2) {
+  stroke: var(--clr);
+  stroke-dasharray: 16;
+  stroke-dashoffset: 16;
+}
+
+#time div {
+  position: absolute;
+  text-align: center;
+  font-weight: 500;
+  font-size: 1rem;
+  color: #000;
+}
+
+#time div span {
+  position: absolute;
+  transform: translateX(-50%) translateY(-11px);
+  font-weight: 300;
+  font-size: 0.5rem;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+  margin-top: 0.5rem;
+}
+
+/* Media Queries */
+@media screen and (max-width: 600px) {
+  #time .circle {
+    width: 60px;
+    height: 60px;
+  }
+
+  #time .circle svg {
+    width: 50px;
+    height: 50px;
+  }
+
+  #time div {
+    font-size: 0.8rem;
+  }
+
+  #time div span {
+    font-size: 0.5rem;
+  }
+
+  /* #time .dots {
+    top: 7px;
+  }
+
+  #time .dots::before {
+    top: 7px;
+    width: 11px;
+    height: 11px;
+  } */
+}
+
+@media screen and (max-width: 300px) {
+  .align {
+    align-items: center;
+    margin-left: -0.6rem;
+  }
+}
