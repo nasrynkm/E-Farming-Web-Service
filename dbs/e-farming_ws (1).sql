@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 15, 2023 at 01:51 PM
--- Server version: 10.4.19-MariaDB
--- PHP Version: 8.0.7
+-- Generation Time: May 25, 2023 at 12:19 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -34,8 +34,19 @@ CREATE TABLE `products` (
   `Quantity` decimal(10,2) NOT NULL,
   `StartLimit` decimal(10,2) NOT NULL,
   `Location` text NOT NULL,
-  `userRef` int(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `userRef` int(255) NOT NULL,
+  `eventDate` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`ID`, `Category`, `Price`, `Quantity`, `StartLimit`, `Location`, `userRef`, `eventDate`) VALUES
+(1, 'Carrots', 10000.00, 80.00, 1.00, 'Kibada, Dar', 1509690168, '2023-05-26 17:43:00'),
+(3, 'Cinnamon', 20000.00, 140.00, 10.00, 'Kigale', 1509690168, NULL),
+(4, 'Garlic', 20000.00, 140.00, 10.00, 'Kigale', 1509690168, NULL),
+(8, 'Carrots', 13000.00, 90.00, 1.00, 'Kisarawe', 1000630109, NULL);
 
 -- --------------------------------------------------------
 
@@ -54,16 +65,17 @@ CREATE TABLE `users` (
   `passwords` varchar(255) NOT NULL,
   `account` varchar(255) NOT NULL,
   `profilePhoto` varchar(400) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`userID`, `uniqueID`, `firstName`, `lastName`, `email`, `phone`, `locationed`, `passwords`, `account`, `profilePhoto`) VALUES
-(16, 76996895, 'Naseeb', 'Khamis', 'naseeb@gmail.com', '0626881232', 'Kokoni, Unguja', 'yesu', 'Farmer', '1683871762blue-rose.jpg'),
-(17, 142091699, 'Osama', 'Sachu', 'osama.sachu@gmail.com', '0692559845', 'Kibada, Kigamboni', 'yesu', 'Customer', '1683879354istockphoto-1320620585-170667a.jpg'),
-(18, 1321831711, 'Amiri', 'Mtunduu', 'amirisenge@gmail.com', '0653567752', 'Kimara, Suka', 'yesu', 'Farmer', '1683881087cupcakes-690040.jpg');
+(1, 1509690168, 'Nasry', 'Mansour', 'nasrynkm24@gmail.com', '0688897697', 'Kigoma, Ujiji', '3', 'Farmer', '1685004844IMG_0353.jpeg'),
+(2, 34058016, 'Amir', 'Mtunduu', 'amir@gmail.com', '0653565298', 'Kimara', 'yesu', 'Customer', '1685004726IMG_0380.jpeg'),
+(3, 1000630109, 'Osama', 'Sachu', 'osama.sachu@gmail.com', '0692569855', 'Kibada', 'yesu', 'Farmer', '1684500899IMG_0475.jpeg'),
+(5, 808148428, 'Sandra', 'Stanley', 'sandra@hotmail.com', '0688897697', 'Irangi, Singida', '32', 'Farmer', '1684500198istockphoto-1373227608-170667a (1).jpg');
 
 --
 -- Indexes for dumped tables
@@ -89,13 +101,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `userID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `userID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
