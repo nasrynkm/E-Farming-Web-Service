@@ -15,10 +15,13 @@ function fetchProducts(category, userRef) {
         var products = JSON.parse(xhr.responseText);
         console.log(products);
 
-        var section = document.querySelector(".addswidth");
-        section.innerHTML = "";
+        // var section = document.querySelector(".addswidth");
+        // section.innerHTML = "";
 
         if (products.length > 0) {
+          // Create a document fragment to hold the new elements
+          var fragment = document.createDocumentFragment();
+
           products.forEach(function (product) {
             console.log(product);
 
@@ -165,26 +168,6 @@ function fetchProducts(category, userRef) {
 
               let x;
 
-              // Create unique variables for each product's countdown values
-              let days = timeElement.querySelector("#days");
-              let hours = timeElement.querySelector("#hours");
-              let minutes = timeElement.querySelector("#minutes");
-              let seconds = timeElement.querySelector("#seconds");
-              let dd = timeElement.querySelector("#dd");
-              let hh = timeElement.querySelector("#hh");
-              let mm = timeElement.querySelector("#mm");
-              let ss = timeElement.querySelector("#ss");
-
-              /*PROBLEM OF LAST VERSION WHERE COUNT DOWN WAS OVERRIDING
-              The main problem was that you were using global variables (`days`, `hours`, `minutes`, `seconds`, `dd`, `hh`, `mm`, `ss`)
-              to store the countdown values for all the products. As a result, when the countdown values were updated for each product, 
-              the variables were overwritten, leading to incorrect display of countdown values.
-              In JavaScript, global variables are shared among all the code execution and can be accessed and modified from any part of the code. 
-              In your case, since the variables were global, the last assigned values were reflected in all the product countdown displays.
-              To fix the issue, it was necessary to create separate variables for each product's countdown values. By doing so, each product's
-              countdown values were stored in their respective variables, ensuring that the correct values were displayed for each product and 
-              not overwritten by other products' values.
-            */
               if (
                 formattedEndDate !== "00/00/0000 00:00:00" &&
                 formattedEndDate !== null
@@ -217,11 +200,21 @@ function fetchProducts(category, userRef) {
                   let formattedM = m.toString().padStart(2, "0"); // Add leading zero if necessary
                   let formattedS = s.toString().padStart(2, "0"); // Add leading zero if necessary
 
+                  let days = document.getElementById("days");
+                  let hours = document.getElementById("hours");
+                  let minutes = document.getElementById("minutes");
+                  let seconds = document.getElementById("seconds");
+
                   // GETTING THE OUTPUT TO DIV ID'S HTML
                   days.innerHTML = formattedD + "<br /><span>Day</span>";
                   hours.innerHTML = formattedH + "<br /><span>Hrs</span>";
                   minutes.innerHTML = formattedM + "<br /><span>min</span>";
                   seconds.innerHTML = formattedS + "<br /><span>sec</span>";
+
+                  let dd = document.getElementById("dd");
+                  let hh = document.getElementById("hh");
+                  let mm = document.getElementById("mm");
+                  let ss = document.getElementById("ss");
 
                   //   ANIMATING DOT'S STROKE IN STYLE
                   dd.style.strokeDashoffset = 440 - (440 * formattedD) / 365; //365 days in a year
@@ -299,24 +292,41 @@ function fetchProducts(category, userRef) {
             console.log(product.account);
             console.log(product.uniqueID);
 
-            // var trackButton = document.createElement("button");
-            // trackButton.type = "button";
-            // trackButton.className = "buttonComponent view";
-            // trackButton.textContent = "Track";
-            // buttonContainer.appendChild(trackButton);
+            var editButton = document.createElement("button");
+            editButton.type = "button";
+            editButton.className = "buttonComponent view";
+            var editLink = document.createElement("a");
+            editLink.href = "updateProduct.php?edit=" + product.ID;
+            editLink.textContent = "Edit";
+            editButton.appendChild(editLink);
 
-            var contactButton = document.createElement("button");
-            contactButton.type = "button";
-            contactButton.className = "buttonComponent contact";
-            contactButton.textContent = "Contact";
-            buttonContainer.appendChild(contactButton);
+            var deleteButton = document.createElement("button");
+            deleteButton.type = "button";
+            deleteButton.className = "buttonComponent contact";
+            var deleteLink = document.createElement("a");
+            deleteLink.href = "farmerDash.php?delete=" + product.ID;
+            deleteLink.textContent = "Delete";
+            deleteButton.appendChild(deleteLink);
+
+            buttonContainer.appendChild(editButton);
+            buttonContainer.appendChild(deleteButton);
 
             componentFlex4.appendChild(buttonContainer);
             innerAddsContainer.appendChild(componentFlex4);
 
-            addContainer.appendChild(innerAddsContainer);
-            section.appendChild(addContainer);
+            // addContainer.appendChild(innerAddsContainer);
+            // section.appendChild(addContainer);
+
+            // Append the addContainer to the fragment instead of directly to the section
+            fragment.appendChild(addContainer);
           });
+
+          // Clear the existing content of the section
+          var section = document.querySelector(".addswidth");
+          section.innerHTML = "";
+
+          // Append the fragment containing the new addContainer elements to the section
+          section.appendChild(fragment);
         } else {
           var noAddsMessage = document.createElement("h2");
           noAddsMessage.style.textAlign = "center";

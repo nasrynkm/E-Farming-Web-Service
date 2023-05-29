@@ -165,6 +165,26 @@ function fetchProducts(category, userRef) {
 
               let x;
 
+              // Create unique variables for each product's countdown values
+              let days = timeElement.querySelector("#days");
+              let hours = timeElement.querySelector("#hours");
+              let minutes = timeElement.querySelector("#minutes");
+              let seconds = timeElement.querySelector("#seconds");
+              let dd = timeElement.querySelector("#dd");
+              let hh = timeElement.querySelector("#hh");
+              let mm = timeElement.querySelector("#mm");
+              let ss = timeElement.querySelector("#ss");
+
+              /*PROBLEM OF LAST VERSION WHERE COUNT DOWN WAS OVERRIDING
+              The main problem was that you were using global variables (`days`, `hours`, `minutes`, `seconds`, `dd`, `hh`, `mm`, `ss`)
+              to store the countdown values for all the products. As a result, when the countdown values were updated for each product, 
+              the variables were overwritten, leading to incorrect display of countdown values.
+              In JavaScript, global variables are shared among all the code execution and can be accessed and modified from any part of the code. 
+              In your case, since the variables were global, the last assigned values were reflected in all the product countdown displays.
+              To fix the issue, it was necessary to create separate variables for each product's countdown values. By doing so, each product's
+              countdown values were stored in their respective variables, ensuring that the correct values were displayed for each product and 
+              not overwritten by other products' values.
+            */
               if (
                 formattedEndDate !== "00/00/0000 00:00:00" &&
                 formattedEndDate !== null
@@ -197,21 +217,11 @@ function fetchProducts(category, userRef) {
                   let formattedM = m.toString().padStart(2, "0"); // Add leading zero if necessary
                   let formattedS = s.toString().padStart(2, "0"); // Add leading zero if necessary
 
-                  let days = document.getElementById("days");
-                  let hours = document.getElementById("hours");
-                  let minutes = document.getElementById("minutes");
-                  let seconds = document.getElementById("seconds");
-
                   // GETTING THE OUTPUT TO DIV ID'S HTML
                   days.innerHTML = formattedD + "<br /><span>Day</span>";
                   hours.innerHTML = formattedH + "<br /><span>Hrs</span>";
                   minutes.innerHTML = formattedM + "<br /><span>min</span>";
                   seconds.innerHTML = formattedS + "<br /><span>sec</span>";
-
-                  let dd = document.getElementById("dd");
-                  let hh = document.getElementById("hh");
-                  let mm = document.getElementById("mm");
-                  let ss = document.getElementById("ss");
 
                   //   ANIMATING DOT'S STROKE IN STYLE
                   dd.style.strokeDashoffset = 440 - (440 * formattedD) / 365; //365 days in a year

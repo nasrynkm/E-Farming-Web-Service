@@ -92,14 +92,14 @@ if (!isset($_SESSION['uniqueID']) && !isset($fetchProductID)) {
       $updateEventDate = "UPDATE products SET eventDate = '$eventDate' WHERE ID = $fetchProductID";
       $updatedEventDate = mysqli_query($connection, $updateEventDate);
 
-      if ($updatedEventDate) {
-        $alert_success[] = "Event Date Updated Successfully";
-      } else {
-        $alert_info[] = "Failed! to Update Event Date";
-      }
+      // if ($updatedEventDate) {
+      //   $alert_success[] = "Event Date Updated Successfully";
+      // } else {
+      //   $alert_info[] = "Failed! to Update Event Date";
+      // }
     }
 
-    $fetchCategory = "SELECT Category FROM products WHERE ID = $fetchProductID";
+    $fetchCategory = "SELECT Category, eventDate FROM products WHERE ID = $fetchProductID";
     $fetchedCategory = mysqli_query($connection, $fetchCategory);
 
     $cat = mysqli_fetch_assoc($fetchedCategory);
@@ -178,11 +178,10 @@ if (!isset($_SESSION['uniqueID']) && !isset($fetchProductID)) {
             </label>
 
             <?php
-            $eventDate = $row['eventDate']; // Get the event date from $row
+            $eventedDate = $row['eventDate']; // Get the event date from $row
 
-            $formattedDateTime = date('d/m/Y H:i:s', strtotime($eventDate)); // Format the date and time as dd/mm/yyyy HH:ii:ss
+            $formattedDateTime = date('Y-m-d\TH:i', strtotime($eventedDate)); // Format the date and time as yyyy-mm-ddTHH:ii
             ?>
-
             <input type="datetime-local" name="dateEvent" id="event" class="event" value="<?php echo $formattedDateTime; ?>" />
           </div>
           <!-- ENDING YIELD TIME IF ANY USER WANTS TO SET IT -->
@@ -247,8 +246,6 @@ if (!isset($_SESSION['uniqueID']) && !isset($fetchProductID)) {
   <!-- ENDING THE FOOTER OF THE PAGE -->
 
   <!-- WHERE SCRIPTS STARTS -->
-  <script src="../../js/toggleButton.js"></script>
-
 
   <!-- SweetAlert CDN js Link and PhP file -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>

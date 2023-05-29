@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Animated Popup Modal Box</title>
+    <link rel="stylesheet" href="./popUp.css" />
+    <link
+      href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <section>
+        <div id="hireBtn" class="button">
+          <button>Hire me</button>
+        </div>
+      </div>
+
+      <div class="popup-outer">
+        <div class="popup-box">
+          <i id="close" class="bx bx-x close"></i>
+          <div class="profile-text">
+            <img src="profile.png" alt="" />
+            <div class="text">
+              <span class="name">Prem Shahi</span>
+              <span class="profession">Web & Web Designer</span>
+            </div>
+          </div>
+          <form action="#">
+            <div class="detailsProf">
+              <p><i class="fa-solid fa-phone-flip"></i>0688897697</p>
+              <p><i class="fa-solid fa-envelope"></i>nasrynkm24@gmail.com</p>
+            </div>
+            <textarea
+              spellcheck="false"
+              placeholder="Enter your message"
+            ></textarea>
+            <div class="button">
+              <button id="close" class="cancel">Cancel</button>
+              <button class="send">Send</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+ 
+    <script src="./popUp.js"></script>
+  </body>
+</html>
