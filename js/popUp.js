@@ -1,15 +1,20 @@
-const contactSection = document.querySelector("contactSection"),
-  contact = contactSection.querySelector("buttonComponent"),
-  closeBtn = contactSection.querySelectorAll("#close"),
-  textArea = contactSection.querySelector("textarea");
+var section = document.querySelector("section.contactSection");
 
-contact.addEventListener("click", () => {
-  contactSection.classList.add("show");
+// Select the elements within the section
+// var contactButton = section.querySelector(".buttonComponent");
+var contactButton = section.querySelector("#hireBtn");
+var closeButtons = section.querySelectorAll("#close");
+var textArea = section.querySelector("textarea");
+
+contactButton.addEventListener("click", () => {
+  section.classList.add("show");
+  console.log("Contact button clicked!");
 });
 
-closeBtn.forEach((cBtn) => {
-  cBtn.addEventListener("click", () => {
-    contactSection.classList.remove("show");
+closeButtons.forEach((close) => {
+  close.addEventListener("click", () => {
+    section.classList.remove("show");
     textArea.value = "";
+    console.log("Close button clicked!");
   });
 });

@@ -6,34 +6,66 @@ session_start();
 if (isset($_POST['submit'])) {
 
   $mail = $_POST['email'];
-  $password = $_POST['password'];
+  $enteredPassword = $_POST['password'];
 
-  if (!empty($mail) && !empty($password)) {
+  if (!empty($mail) && !empty($enteredPassword)) {
 
     if (filter_var($mail, FILTER_VALIDATE_EMAIL)) {
 
-      $selecting = "SELECT * FROM users WHERE email = '$mail' AND passwords = '$password'";
+      $selecting = "SELECT * FROM users WHERE email = '$mail'";
       $query1 = mysqli_query($connection, $selecting);
 
-      if (mysqli_num_rows($query1) > 0) {
+      if ($query1) {
+        if (mysqli_num_rows($query1) > 0) {
 
-        $row = mysqli_fetch_assoc($query1);
-        $_SESSION['uniqueID'] = $row['uniqueID'];
+          $row = mysqli_fetch_assoc($query1);
 
-        // DIRECTING TO THE DASH BOARD DEPENDING ON ACCOUNT TYPE
-        if ($row['account'] == "Farmer" || $row['account'] == "farmer") {
+          // DIRECTING TO THE DASH BOARD DEPENDING ON ACCOUNT TYPE
+          if ($row['account'] == "Farmer" || $row['account'] == "farmer") {
+            // Retrieve the stored hashed password from the database
+            $storedHashedPassword = $row['passwords'];
 
-          header("Location: ./Farmer/farmerDash.php");
-          $alert_success[] = "Log in Successful";
-        } else {
+            // Verify the entered password against the stored hashed password
+            if (password_verify($enteredPassword, $storedHashedPassword)) {
+              // Password is correct, proceed with login
 
-          header("Location: ./Customer/customerDash.php");
-          $alert_success[] = "Log in Successful";
+              $_SESSION['uniqueID'] = $row['uniqueID'];
+              $alert_success[] = "Log in Successful";
+              header("Location: ./Farmer/farmerDash.php");
+            } else {
+              // Invalid password
+              $alert_warned[] = "Invalid password!";
+            }
+          } else if ($row['account'] == "Customer" || $row['account'] == "customer") {
+            // Retrieve the stored hashed password from the database
+            $storedHashedPassword = $row['passwords'];
+
+            // Verify the entered password against the stored hashed password
+            if (password_verify($enteredPassword, $storedHashedPassword)) {
+              // Password is correct, proceed with login
+              $_SESSION['uniqueID'] = $row['uniqueID'];
+              header("Location: ./Customer/customerDash.php");
+            } else {
+              // Invalid password
+              $alert_warned[] = "Invalid password!";
+            }
+          } else {
+            // Retrieve the stored hashed password from the database
+            $storedHashedPassword = $row['passwords'];
+
+            // Verify the entered password against the stored hashed password
+            if (password_verify($enteredPassword, $storedHashedPassword)) {
+              // Password is correct, proceed with login
+              $_SESSION['uniqueID'] = $row['uniqueID'];
+              header("Location: ../Admin/Index.php");
+            } else {
+              // Invalid password
+              $alert_warned[] = "Invalid password!";
+            }
+          }
         }
-        // $alert_success[] = "Log in Successful";
       } else {
-
-        $alert_error[] = "Email or Password is Incorrect!";
+        $alert_info[] = "User with $mail does not exist!";
       }
     } else {
 

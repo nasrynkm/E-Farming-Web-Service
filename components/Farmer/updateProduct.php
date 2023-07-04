@@ -29,77 +29,92 @@ if (!isset($_SESSION['uniqueID']) && !isset($fetchProductID)) {
       }
     }
 
-    $productPrice = $_POST['productPrice'];
-    if (!empty($productPrice)) {
-
-      $updatePrice = "UPDATE products SET Price = ' $productPrice' WHERE ID = $fetchProductID";
-      $updatedPrice = mysqli_query($connection, $updatePrice);
-
-      if ($updatedPrice) {
-
-        $alert_success[] = "Product Price Updated Successfully";
-      } else {
-
-        $alert_info[] = "Failed! to Update Product Price";
-      }
-    }
-
     $productQuantity = $_POST['productQuantity'];
     if (!empty($productQuantity)) {
-
-      $updateQuantity = "UPDATE products SET Quantity = '$productQuantity' WHERE ID = $fetchProductID";
-      $updatedQuantity = mysqli_query($connection, $updateQuantity);
-
-      if ($updatedQuantity) {
-
-        $alert_success[] = "Product Quantity Updated Successfully";
+      if (!is_numeric($productQuantity) || $productQuantity <= 0) {
+        $alert_warned[] = "Product Quantity is required and should be a positive number.";
       } else {
+        $updateQuantity = "UPDATE products SET Quantity = '$productQuantity' WHERE ID = $fetchProductID";
+        $updatedQuantity = mysqli_query($connection, $updateQuantity);
 
-        $alert_info[] = "Failed! to Update Product Quantity";
+        if ($updatedQuantity) {
+
+          $alert_success[] = "Product Quantity Updated Successfully";
+        } else {
+
+          $alert_info[] = "Failed! to Update Product Quantity";
+        }
       }
     }
 
     $startLimit = $_POST['sellingLimit'];
     if (!empty($startLimit)) {
 
-      $updateStartLimit = "UPDATE products SET StartLimit = '$startLimit' WHERE ID = $fetchProductID";
-      $updatedStartLimit = mysqli_query($connection, $updateStartLimit);
-
-      if ($updatedStartLimit) {
-
-        $alert_success[] = "Start Limit Updated Successfully";
+      if (empty($startLimit) || !is_numeric($startLimit) || $startLimit <= 0) {
+        $alert_warned[] = "Selling Limit is required and should be a positive number.";
       } else {
+        $updateStartLimit = "UPDATE products SET StartLimit = '$startLimit' WHERE ID = $fetchProductID";
+        $updatedStartLimit = mysqli_query($connection, $updateStartLimit);
 
-        $alert_info[] = "Failed! to Update Start Limit";
+        if ($updatedStartLimit) {
+
+          $alert_success[] = "Start Limit Updated Successfully";
+        } else {
+
+          $alert_info[] = "Failed! to Update Start Limit";
+        }
+      }
+    }
+
+    $productPrice = $_POST['productPrice'];
+    if (!empty($productPrice)) {
+
+      if (!is_numeric($productPrice) || $productPrice <= 0) {
+        $alert_warned[] = "Product Price is required and should be a positive number.";
+      } else {
+        $updatePrice = "UPDATE products SET Price = ' $productPrice' WHERE ID = $fetchProductID";
+        $updatedPrice = mysqli_query($connection, $updatePrice);
+
+        if ($updatedPrice) {
+
+          $alert_success[] = "Product Price Updated Successfully";
+        } else {
+
+          $alert_info[] = "Failed! to Update Product Price";
+        }
       }
     }
 
     $location = $_POST['userLocation'];
     if (!empty($location)) {
 
-      $updateLocation = "UPDATE products SET Location = '$location' WHERE ID = $fetchProductID";
-      $updatedLocation = mysqli_query($connection, $updateLocation);
-
-      if ($updatedLocation) {
-        $alert_success[] = "Location Updated Successfully";
+      if (empty($location) || !is_string($location) || strlen($location) > 255) {
+        $alert_warned[] = "User Location is required and should be a string with a maximum length of 255 characters.";
       } else {
-        $alert_info[] = "Failed! to Update Location";
+        $updateLocation = "UPDATE products SET Location = '$location' WHERE ID = $fetchProductID";
+        $updatedLocation = mysqli_query($connection, $updateLocation);
+
+        if ($updatedLocation) {
+          $alert_success[] = "Location Updated Successfully";
+        } else {
+          $alert_info[] = "Failed! to Update Location";
+        }
       }
     }
 
     $eventDate = $_POST['dateEvent'];
-    if (!empty($eventDate)) {
+    if (!empty($eventDate) || !($eventDate == "01/01/1970 01:00")) {
       $updateEventDate = "UPDATE products SET eventDate = '$eventDate' WHERE ID = $fetchProductID";
       $updatedEventDate = mysqli_query($connection, $updateEventDate);
 
-      // if ($updatedEventDate) {
-      //   $alert_success[] = "Event Date Updated Successfully";
-      // } else {
-      //   $alert_info[] = "Failed! to Update Event Date";
-      // }
+      if ($updatedEventDate) {
+        $alert_success[] = "Event Date Updated Successfully";
+      } else {
+        $alert_info[] = "Failed! to Update Event Date";
+      }
     }
 
-    $fetchCategory = "SELECT Category, eventDate FROM products WHERE ID = $fetchProductID";
+    $fetchCategory = "SELECT Category FROM products WHERE ID = $fetchProductID";
     $fetchedCategory = mysqli_query($connection, $fetchCategory);
 
     $cat = mysqli_fetch_assoc($fetchedCategory);
@@ -155,20 +170,21 @@ if (!isset($_SESSION['uniqueID']) && !isset($fetchProductID)) {
             <?php $optionCat = $row['Category']; ?>
 
             <option value="Carrots" <?php if ($optionCat == "Carrots") echo 'selected = "selected"'; ?>>Carrots</option>
-            <option value="Cinnamon" <?php if ($optionCat == "Cinnamon") echo 'selected = "selected"'; ?>>Cinnamon</option>
+            <option value="Cinnamon" <?php if ($optionCat == "Beans") echo 'selected = "selected"'; ?>>Beans</option>
             <option value="Cloves" <?php if ($optionCat == "Cloves") echo 'selected = "selected"'; ?>>Cloves</option>
             <option value="Cotton" <?php if ($optionCat == "Cotton") echo 'selected = "selected"'; ?>>Cotton</option>
             <option value="Garlic" <?php if ($optionCat == "Garlic") echo 'selected = "selected"'; ?>>Garlic</option>
+            <option value="Wheat" <?php if ($optionCat == "Irish Potatoes") echo 'selected = "selected"'; ?>>Irish Potatoes</option>
             <option value="Onions" <?php if ($optionCat == "Onions") echo 'selected = "selected"'; ?>>Onions</option>
             <option value="Maize" <?php if ($optionCat == "Maize") echo 'selected = "selected"'; ?>>Maize</option>
             <option value="Rice" <?php if ($optionCat == "Rice") echo 'selected = "selected"'; ?>>Rice</option>
-            <option value="Wheat" <?php if ($optionCat == "Wheat") echo 'selected = "selected"'; ?>>Wheat</option>
-
+            <option value="Wheat" <?php if ($optionCat == "Wheat Grain") echo 'selected = "selected"'; ?>>Wheat Grain</option>
+            <option value="Wheat" <?php if ($optionCat == "Sorghum") echo 'selected = "selected"'; ?>>Sorghum</option>
 
           </select>
-          <input type="decimal" placeholder="<?php echo $row['Price']; ?>" name="productPrice" class="itemsBox" />
           <input type="decimal" placeholder="<?php echo $row['Quantity']; ?>" name="productQuantity" class="itemsBox" />
           <input type="decimal" placeholder="<?php echo $row['StartLimit']; ?>" name="sellingLimit" class="itemsBox" />
+          <input type="decimal" placeholder="<?php echo $row['Price']; ?>" name="productPrice" class="itemsBox" />
           <input type="text" placeholder="<?php echo $row['Location']; ?>" name="userLocation" class="itemsBox" />
 
           <!-- STARTING YIELD TIME IF ANY USER WANTS TO SET IT -->
@@ -203,17 +219,15 @@ if (!isset($_SESSION['uniqueID']) && !isset($fetchProductID)) {
         <div class="footerColumn">
           <h4>E-Farming WS</h4>
           <ul>
-            <li><a href="">About US</a></li>
-            <li><a href="">Services</a></li>
-            <!-- <li><a href="">Privacy Policy</a></li> -->
+            <li><a href="../../index/About us/about us.html">About US</a></li>
+            <li><a href="../../index/Our service/Our service.html">Services</a></li>
           </ul>
         </div>
         <div class="footerColumn">
           <h4>Help</h4>
           <ul>
-            <li><a href="">Support</a></li>
-            <li><a href="">Feedback</a></li>
-            <!-- <li><a href="">Contacts</a></li> -->
+            <li><a href="../../index/Our service/communication.html">Support</a></li>
+            <!-- <li><a href="">Feedback</a></li> -->
           </ul>
         </div>
         <div class="footerColumn">

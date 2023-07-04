@@ -12,7 +12,7 @@ if (!isset($_SESSION['uniqueID'])) {
         $category = $_GET['category'];
 
         // Preparing the SQL query with a parameterized statement
-        $fetch = "SELECT p.*, u.firstName, u.lastName FROM products p JOIN users u ON p.userRef = u.uniqueID WHERE p.Category = ?";
+        $fetch = "SELECT p.*, u.firstName, u.lastName, u.profilePhoto, u.email, u.phone, u.locationed FROM products p JOIN users u ON p.userRef = u.uniqueID WHERE p.Category = ?";
 
         // Checking if userRef is provided
         if (isset($_GET['userRef'])) {

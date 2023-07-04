@@ -11,10 +11,12 @@ if (isset($_POST['submit'])) {
   $email = $_POST['email'];
   $phone = $_POST['phoneNo'];
   $location = $_POST['location'];
-  $password = $_POST['password'];
+  $passwordFetched = $_POST['password'];
   $account = $_POST['accountType'];
 
-  if (!empty($fName) && !empty($lName) && !empty($email) && !empty($phone) && !empty($password) && !empty($account)) {
+  $encryptedPassword = password_hash($_POST['password'], PASSWORD_DEFAULT);
+
+  if (!empty($fName) && !empty($lName) && !empty($email) && !empty($phone) && !empty($passwordFetched) && !empty($account)) {
 
     //CHEKING MAIL VALIDITY 
     if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -28,58 +30,73 @@ if (isset($_POST['submit'])) {
 
         $alert_warned[] = "$email Already Exists";
       } else {
-        if (isset($_FILES['image'])) {
 
-          //SPLITITNG THE IMAGE BLOCK UPLOADED BY THE USER
-          $imgName = $_FILES['image']['name'];
-          $imgType = $_FILES['image']['type'];
-          $tmpName = $_FILES['image']['tmp_name'];
+        // Check if the password meets the criteria
+        if (strlen($passwordFetched) < 8 || !preg_match('/[A-Za-z]/', $passwordFetched) || !preg_match('/[0-9]/', $passwordFetched)) {
+          $alert_info[] = "Password must exceed 8 characters and contain a mix of letters and numbers.";
+        } else {
+          // Set the options for password hashing
+          $options = [
+            'cost' => 12, // Increase the cost factor to make the hashing process slower
+          ];
 
-          //DIVIDING IMAGE PARTS AND GETTING THE EXTENSIONS 
-          $imgExplode = explode('.', $imgName);
-          $imgExtension = end($imgExplode);
+          // Hash the password using bcrypt with the specified options
+          $password = password_hash($passwordFetched, PASSWORD_BCRYPT, $options);
 
-          //SETTING A POOL OF EXTENSIONS 
-          $extensions = ['png', 'jpeg', 'jpg'];
+          if (isset($_FILES['image'])) {
 
-          if (in_array($imgExtension, $extensions) === true) { //CHECKING EXTENSION VALIDITY
-            $time = time(); //GETTING TIMESTAMP
+            //SPLITITNG THE IMAGE BLOCK UPLOADED BY THE USER
+            $imgName = $_FILES['image']['name'];
+            $imgType = $_FILES['image']['type'];
+            $tmpName = $_FILES['image']['tmp_name'];
 
-            //ASSIGNING NEW IMAGE NAME WITH TIME OBTAINED .. THEN UPLOADING
-            $newImgName = $time . $imgName;
-            $targetDir = "uploaded/";
+            //DIVIDING IMAGE PARTS AND GETTING THE EXTENSIONS 
+            $imgExplode = explode('.', $imgName);
+            $imgExtension = end($imgExplode);
 
-            if (move_uploaded_file($tmpName, $targetDir . $newImgName)) {
+            //SETTING A POOL OF EXTENSIONS 
+            $extensions = ['png', 'jpeg', 'jpg'];
 
-              // CREATING RANDOM ID FOR EACH USER
-              $randomID = rand(time(), 10000000);
+            if (in_array($imgExtension, $extensions) === true) { //CHECKING EXTENSION VALIDITY
+              $time = time(); //GETTING TIMESTAMP
 
-              $selecting2 = "INSERT INTO users(uniqueID, firstName, lastName, email, phone, locationed, passwords, account, profilePhoto) VALUES($randomID, '$fName', '$lName', '$email', '$phone', '$location', '$password', '$account', '$newImgName')";
-              $query2 = mysqli_query($connection, $selecting2);
+              //ASSIGNING NEW IMAGE NAME WITH TIME OBTAINED .. THEN UPLOADING
+              $newImgName = $time . $imgName;
+              $targetDir = "uploaded/";
 
-              if ($query2) {
+              if (move_uploaded_file($tmpName, $targetDir . $newImgName)) {
 
-                $selecting3 = "SELECT * FROM users WHERE email = '$email'";
-                $query3 = mysqli_query($connection, $selecting3);
+                // CREATING RANDOM ID FOR EACH USER
+                $randomID = rand(time(), 10000000);
 
-                //LOOKING FOR EXISTING MAIL AND ASSIGNING UNIQUEID TO A SESSION
-                if (mysqli_num_rows($query3) > 0) {
+                $selecting2 = "INSERT INTO users(uniqueID, firstName, lastName, email, phone, locationed, passwords, account, profilePhoto) VALUES($randomID, '$fName', '$lName', '$email', '$phone', '$location', '$password', '$account', '$newImgName')";
+                $query2 = mysqli_query($connection, $selecting2);
 
-                  $row = mysqli_fetch_assoc($query3);
-                  $_SESSION['uniqueID'] = $row['uniqueID'];
-                  $alert_success[] = "Account Registration Successful";
+                if ($query2) {
+
+                  $selecting3 = "SELECT * FROM users WHERE email = '$email'";
+                  $query3 = mysqli_query($connection, $selecting3);
+
+                  //LOOKING FOR EXISTING MAIL AND ASSIGNING UNIQUEID TO A SESSION
+                  if (mysqli_num_rows($query3) > 0) {
+
+                    $row = mysqli_fetch_assoc($query3);
+                    $_SESSION['uniqueID'] = $row['uniqueID'];
+                    $alert_success[] = "Account Registration Successful";
+                    header("Location: ./login.php");
+                  }
+                } else {
+                  $alert_info[] = "Something went wrong!";
                 }
               } else {
-                $alert_info[] = "Something went wrong!";
+                $alert_info[] = "Image not uploaded";
               }
             } else {
-              $alert_info[] = "Image not uploaded";
+              $alert_warned[] = "Image Should Be jepg, jpg, png";
             }
           } else {
-            $alert_warned[] = "Image Should Be jepg, jpg, png";
+            $alert_error[] = "Please Select an Image File";
           }
-        } else {
-          $alert_error[] = "Please Select an Image File";
         }
       }
     } else {
@@ -140,7 +157,9 @@ if (isset($_POST['submit'])) {
 
         <div class="field input">
           <label for="email">Email Address</label>
-          <input type="text" name="email" placeholder="Enter Email" />
+          <input type="text" name="email" placeholder="Enter Email" value="<?php if (isset($_POST['submit'])) {
+                                                                              echo $email;
+                                                                            } ?>" />
         </div>
         <div class="field input">
           <label for="phoneNo">Phone Number</label>
@@ -196,7 +215,6 @@ if (isset($_POST['submit'])) {
   </div>
 
   <script src="../js/hideShowPassword.js"></script>
-  <script src="../../js/googlePlaces.js"></script>
 
   <!-- SweetAlert CDN js Link and PhP file -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>

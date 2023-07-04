@@ -28,20 +28,22 @@ if (!isset($_SESSION['uniqueID'])) {
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Farmer's Dashboard</title>
+  <title>View Ads</title>
   <link rel="stylesheet" href="../../css/dashFarming.css" />
   <link rel="stylesheet" href="../../css/pageTips.css" />
   <link rel="stylesheet" href="../../css/footer.css" />
   <link rel="stylesheet" href="../../css/adds.css">
   <link rel="stylesheet" href="../../css/cattings.css">
   <link rel="stylesheet" href="../../css/count.css">
+  <link rel="stylesheet" href="../../css/search.css">
+  <link rel="stylesheet" href="../../css/popUp.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
   <section>
     <section id="header">
-      <a class="logo" href="#">E-Farming WS</a>
+      <a class="logo" href="../../index/index.html">E-FARMING WS</a>
 
       <?php
       //  EXTRACTING USER USING SESSION 
@@ -58,11 +60,10 @@ if (!isset($_SESSION['uniqueID'])) {
       <div>
         <ul id="navigation">
           <li><a href="./farmerDash.php">Dashboard</a></li>
-          <li><a href="./addProduct.php">Adds Manager</a></li>
+          <li><a href="./addProduct.php">Ads Manager</a></li>
           <li><a class="active" href="./viewAdds.php">View Adds</a></li>
+          <li><a href="../markets.php">Markets</a></li>
           <li><a href="../logout.php?logout_id=<?php echo $img['uniqueID']; ?>">Log Out</a></li>
-          <!-- <input type="text" placeholder="Enter text to search..." /> -->
-          <!-- <button><i class="fas fa-search"></i></button> -->
         </ul>
       </div>
 
@@ -80,9 +81,9 @@ if (!isset($_SESSION['uniqueID'])) {
 
         <ul>
           <li><a href="./farmerDash.php">Dashboard</a></li>
-          <li><a href="./addProduct.php">Adds Manager</a></li>
+          <li><a href="./addProduct.php">Ads Manager</a></li>
           <li><a class="active" href="./viewAdds.php">View Adds</a></li>
-          <!-- <li><a href="">User Profile</a></li> -->
+          <li><a href="../markets.php">Markets</a></li>
           <li><a href="../logout.php?logout_id=<?php echo $img['uniqueID']; ?>">Log Out</a></li>
         </ul>
       </div>
@@ -101,8 +102,8 @@ if (!isset($_SESSION['uniqueID'])) {
                 </a>
               </div>
               <div class="allItemsContainer">
-                <a onclick="fetchProducts('Cinnamon')">
-                  <h2 class="allInnerItems">Cinnamon</h2>
+                <a onclick="fetchProducts('Beans')">
+                  <h2 class="allInnerItems">Beans</h2>
                 </a>
               </div>
               <div class="allItemsContainer">
@@ -121,6 +122,11 @@ if (!isset($_SESSION['uniqueID'])) {
                 </a>
               </div>
               <div class="allItemsContainer">
+                <a onclick="fetchProducts('Irish Potatoes')">
+                  <h2 class=" allInnerItems">Irish Potatoes</h2>
+                </a>
+              </div>
+              <div class="allItemsContainer">
                 <a onclick="fetchProducts('Onions')">
                   <h2 class="allInnerItems">Onions</h2>
                 </a>
@@ -136,14 +142,27 @@ if (!isset($_SESSION['uniqueID'])) {
                 </a>
               </div>
               <div class="allItemsContainer">
-                <a onclick="fetchProducts('Wheat')">
-                  <h2 class="allInnerItems">Wheat</h2>
+                <a onclick="fetchProducts('Wheat Grain')">
+                  <h2 class="allInnerItems">Wheat Grain</h2>
+                </a>
+              </div>
+              <div class="allItemsContainer">
+                <a onclick="fetchProducts('Sorghum')">
+                  <h2 class="allInnerItems">Sorghum</h2>
                 </a>
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      <!-- SEARCH AND FILTER STARTING -->
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search..." />
+        <button class="submit-button" id="submitButton">Search</button>
+      </div>
+      <!-- ENDING SEARCH AND FILTER -->
+
     </div>
     <!-- ENDING THE CROP NAVIGATIONS -->
 
@@ -153,6 +172,9 @@ if (!isset($_SESSION['uniqueID'])) {
     </section>
     <!-- ENDING THE MAIN BODY OF THE DASHBOARD -->
 
+
+
+
     <!-- STARTING THE FOOTER OF THE PAGE -->
     <footer class="footer">
       <div class="footerContainer">
@@ -160,23 +182,21 @@ if (!isset($_SESSION['uniqueID'])) {
           <div class="footerColumn">
             <h4>E-Farming WS</h4>
             <ul>
-              <li><a href="">About US</a></li>
-              <li><a href="">Services</a></li>
-              <!-- <li><a href="">Privacy Policy</a></li> -->
+              <li><a href="../../index/About us/about us.html">About US</a></li>
+              <li><a href="../../index/Our service/Our service.html">Services</a></li>
             </ul>
           </div>
           <div class="footerColumn">
-            <h4>Help</h4>
+            <h4>Support</h4>
             <ul>
-              <li><a href="">Support</a></li>
-              <li><a href="">Feedback</a></li>
-              <!-- <li><a href="">Contacts</a></li> -->
+              <li><a href="../../index/About us/contact us.html">Feedback</a></li>
+              <li><a href="../markets.php">Markets</a></li>
             </ul>
           </div>
           <div class="footerColumn">
             <h4>Access</h4>
             <ul>
-              <li><a href="./viewAdds.php">View Adds</a></li>
+              <li><a href="./viewAdds.php">View Ads</a></li>
               <li><a href="../profile.php?userID=<?php echo $img['uniqueID']; ?>">Profile</a></li>
               <li><a href="../logout.php?logout_id=<?php echo $img['uniqueID'] ?>">Log Out</a></li>
             </ul>
@@ -199,7 +219,6 @@ if (!isset($_SESSION['uniqueID'])) {
   <script src="../../js/toggleButton.js" async></script>
   <script src="../../js/cropMenu.js" async></script>
   <script src="../../js/adds.js" defer></script>
-  <!-- <script src="../../js/addsDash.js" defer></script> -->
 
 </body>
 

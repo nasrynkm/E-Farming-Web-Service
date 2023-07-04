@@ -48,7 +48,7 @@ if (!isset($_SESSION['uniqueID'])) {
   <link rel="stylesheet" href="../../css/adds.css" />
   <link rel="stylesheet" href="../../css/cattings.css">
   <link rel="stylesheet" href="../../css/count.css">
-
+  <link rel="stylesheet" href="../../css/search.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
@@ -58,13 +58,14 @@ if (!isset($_SESSION['uniqueID'])) {
 
 
 
-      <a class="logo" href="#">E-Farming WS</a>
+      <a class="logo" href="../../index/index.html">E-FARMING WS</a>
 
       <div>
         <ul id="navigation">
           <li><a class="active" href="./farmerDash.php">Dashboard</a></li>
-          <li><a href="./addProduct.php">Adds Manager</a></li>
-          <li><a href="./viewAdds.php">View Adds</a></li>
+          <li><a href="./addProduct.php">Ads Manager</a></li>
+          <li><a href="./viewAdds.php">View Ads</a></li>
+          <li><a href="../markets.php">Markets</a></li>
           <li><a href="../logout.php?logout_id=<?php echo $user['uniqueID'] ?>">Log Out</a></li>
         </ul>
       </div>
@@ -82,9 +83,9 @@ if (!isset($_SESSION['uniqueID'])) {
 
         <ul>
           <li><a class="active" href="./farmerDash.php">Dashboard</a></li>
-          <li><a href="./addProduct.php">Adds Manager</a></li>
-          <li><a href="./viewAdds.php">View Adds</a></li>
-          <!-- <li><a href="">User Profile</a></li> -->
+          <li><a href="./addProduct.php">Ads Manager</a></li>
+          <li><a href="./viewAdds.php">View Ads</a></li>
+          <li><a href="../markets.php">Markets</a></li>
           <li><a href="../logout.php?logout_id=<?php echo $user['uniqueID'] ?>">Log Out</a></li>
         </ul>
       </div>
@@ -103,8 +104,8 @@ if (!isset($_SESSION['uniqueID'])) {
                 </a>
               </div>
               <div class="allItemsContainer">
-                <a onclick="fetchProducts('Cinnamon', '<?php echo $user['uniqueID'] ?>')">
-                  <h2 class="allInnerItems">Cinnamon</h2>
+                <a onclick="fetchProducts('Beans', '<?php echo $user['uniqueID'] ?>')">
+                  <h2 class="allInnerItems">Beans</h2>
                 </a>
               </div>
               <div class="allItemsContainer">
@@ -123,6 +124,11 @@ if (!isset($_SESSION['uniqueID'])) {
                 </a>
               </div>
               <div class="allItemsContainer">
+                <a onclick="fetchProducts('Irish Potatoes', '<?php echo $user['uniqueID'] ?>')">
+                  <h2 class=" allInnerItems">Irish Potatoes</h2>
+                </a>
+              </div>
+              <div class="allItemsContainer">
                 <a onclick="fetchProducts('Onions', '<?php echo $user['uniqueID'] ?>')">
                   <h2 class="allInnerItems">Onions</h2>
                 </a>
@@ -138,14 +144,26 @@ if (!isset($_SESSION['uniqueID'])) {
                 </a>
               </div>
               <div class="allItemsContainer">
-                <a onclick="fetchProducts('Wheat', '<?php echo $user['uniqueID'] ?>')">
-                  <h2 class="allInnerItems">Wheat</h2>
+                <a onclick="fetchProducts('Wheat Grain', '<?php echo $user['uniqueID'] ?>')">
+                  <h2 class="allInnerItems">Wheat Grain</h2>
+                </a>
+              </div>
+              <div class="allItemsContainer">
+                <a onclick="fetchProducts('Sorghum', '<?php echo $user['uniqueID'] ?>')">
+                  <h2 class="allInnerItems">Sorghum</h2>
                 </a>
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      <!-- SEARCH AND FILTER STARTING -->
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search..." />
+        <button class="submit-button" id="submitButton">Search</button>
+      </div>
+      <!-- ENDING SEARCH AND FILTER -->
     </div>
     <!-- ENDING THE CROP NAVIGATIONS -->
 
@@ -163,23 +181,21 @@ if (!isset($_SESSION['uniqueID'])) {
           <div class="footerColumn">
             <h4>E-Farming WS</h4>
             <ul>
-              <li><a href="">About US</a></li>
-              <li><a href="">Services</a></li>
-              <!-- <li><a href="">Privacy Policy</a></li> -->
+              <li><a href="../../index/About us/about us.html">About US</a></li>
+              <li><a href="../../index/Our service/Our service.html">Services</a></li>
             </ul>
           </div>
           <div class="footerColumn">
-            <h4>Help</h4>
+            <h4>Support</h4>
             <ul>
-              <li><a href="">Support</a></li>
-              <li><a href="">Feedback</a></li>
-              <!-- <li><a href="">Contacts</a></li> -->
+              <li><a href="../../index/About us/contact us.html">Feedback</a></li>
+              <li><a href="../markets.php">Markets</a></li>
             </ul>
           </div>
           <div class="footerColumn">
             <h4>Access</h4>
             <ul>
-              <li><a href="./viewAdds.php">View Adds</a></li>
+              <li><a href="./viewAdds.php">View Ads</a></li>
               <li><a href="../profile.php?userID=<?php echo $user['uniqueID'] ?>">Profile</a></li>
               <li><a href="../logout.php?logout_id=<?php echo $user['uniqueID'] ?>">Log Out</a></li>
             </ul>
@@ -200,13 +216,12 @@ if (!isset($_SESSION['uniqueID'])) {
   </section>
 
 
-  <script src="../../js/toggleButton.js"></script>
-  <script src="../../js/cropMenu.js"></script>
+  <script src="../../js/toggleButton.js" async></script>
+  <script src="../../js/cropMenu.js" async></script>
   <script src="../../js/addsDash.js" defer></script>
-  <!-- <script src="../../js/dateEvent.js"></script> -->
 
   <!-- SweetAlert CDN js Link and PhP file -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" defer></script>
   <?php @include '../alerts.php'; ?>
 
 </body>

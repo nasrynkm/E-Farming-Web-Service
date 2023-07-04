@@ -10,11 +10,7 @@
 
 body {
   height: 100vh;
-  background: linear-gradient(
-    90deg,
-    rgba(141, 194, 111, 1) 0%,
-    rgba(118, 184, 82, 1) 50%
-  );
+  background: whitesmoke;
 }
 
 /* ADDING CSS TO THE NAV SECTION 'header' */
@@ -22,9 +18,9 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 2rem;
+  padding: 1rem;
   margin: 0 auto;
-  background-color: #eee;
+  background-color: #1e2329;
   width: 100%;
   box-shadow: 0 0.5rem 0.95rem rgb(0, 0, 0, 0.09);
 }
@@ -34,7 +30,7 @@ body {
   text-decoration: none;
   font-size: 1.3rem;
   font-weight: 600;
-  color: #8d448b;
+  color: #fcd535;
   margin-left: 0.5rem;
 }
 
@@ -55,7 +51,7 @@ body {
   text-decoration: none;
   font-size: 1rem;
   font-weight: 300;
-  color: #009578;
+  color: #fff;
   cursor: pointer;
   padding: 0.5rem;
   border-radius: 0.3rem;
@@ -114,7 +110,7 @@ body {
 }
 
 .toggle-btn {
-  color: #000;
+  color: #fff;
   font-size: 1.5rem;
   cursor: pointer;
   display: none;
@@ -128,19 +124,20 @@ body {
   right: 2rem;
   top: 60px;
   width: 19.75rem;
-  background: rgb(255, 255, 255, 0.4);
+  background: rgb(33, 40, 51);
   /* backdrop-filter: blur(15px); */
   border-radius: 10px;
   overflow: hidden;
   transition: height 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 9999;
 }
 
 .dropMenuOpened {
-  height: 15rem;
+  height: auto;
 }
 
 .dropMenu ul {
-  margin-top: 0.3rem;
+  margin-top: 0.08rem;
 }
 
 .dropMenu li {
@@ -152,6 +149,7 @@ body {
   align-items: center;
   justify-content: stretch;
   text-decoration: none;
+  color: #fcd535;
 }
 
 .dropMenu a .profImg {
@@ -162,15 +160,15 @@ body {
 }
 
 .dropMenu li a:hover {
-  background-color: #acbce1;
-  color: white;
+  background-color: black;
+  color: #fcd535;
   transition: 0.3s ease-in;
 }
 
 .dropMenu li a.active {
-  background-color: #61c0b7;
+  background-color: black;
   transition: 1s ease-in-out;
-  color: white;
+  color: #fcd535;
 }
 
 /* ADDING RESPONSIVENESS */
@@ -187,9 +185,10 @@ body {
   /* DISPLAYING THE DRO-DOWN MENU */
   .dropMenu {
     display: block;
-    position: initial;
+    /* position: initial; */
     margin-left: auto;
     margin-right: 1.94rem;
+    z-index: 9999;
   }
 
   .dropMenu a .profImg {
@@ -209,7 +208,13 @@ body {
     margin-top: 0.1rem;
   }
 
-  .dropMenuOpened {
+  /* .dropMenuOpened {
     position: initial;
+  } */
+}
+
+@media (max-width: 290px) {
+  .toggle-btn {
+    margin-left: -3.5rem;
   }
 }

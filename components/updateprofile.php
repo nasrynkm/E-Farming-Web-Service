@@ -110,17 +110,36 @@ if (isset($_SESSION['uniqueID']) && isset($userID)) {
     }
 
     $oldPassword = $_POST['oldPassword'];
-    $newPassword = $_POST['newPassword'];
-    if (!empty($newPassword)) {
-      if ($oldPassword == $user['passwords']) {
+    $newPasswordFetched = $_POST['newPassword'];
+    if (!empty($newPasswordFetched)) {
+      // Retrieve the stored hashed password from the database
+      $enteredPassword = $oldPassword;
+      $storedHashedPassword = $user['passwords'];
 
-        $updatePassword = "UPDATE users SET passwords = '$newPassword' WHERE uniqueID = $userID";
-        $updatedPassword = mysqli_query($connection, $updatePassword);
+      // Verify the entered password against the stored hashed password
+      if (password_verify($enteredPassword, $storedHashedPassword)) {
+        // Password is correct, proceed with login
 
-        if ($updatedPassword) {
-          $alert_success[] = "New Password Updated Successfully";
+        // Check if the password meets the criteria
+        if (strlen($newPasswordFetched) < 8 || !preg_match('/[A-Za-z]/', $newPasswordFetched) || !preg_match('/[0-9]/', $newPasswordFetched)) {
+          $alert_info[] = "Password must exceed 8 characters and contain a mix of letters and numbers.";
         } else {
-          $alert_info[] = "Failed! to Update New Password";
+          // Set the options for password hashing
+          $options = [
+            'cost' => 12, // Increase the cost factor to make the hashing process slower
+          ];
+
+          // Hash the password using bcrypt with the specified options
+          $newPassword = password_hash($newPasswordFetched, PASSWORD_BCRYPT, $options);
+
+          $updatePassword = "UPDATE users SET passwords = '$newPassword' WHERE uniqueID = $userID";
+          $updatedPassword = mysqli_query($connection, $updatePassword);
+
+          if ($updatedPassword) {
+            $alert_success[] = "New Password Updated Successfully";
+          } else {
+            $alert_info[] = "Failed! to Update New Password";
+          }
         }
       } else {
         $alert_error[] = "Old Password is Incorrect!";
@@ -223,7 +242,7 @@ if (isset($_SESSION['uniqueID']) && isset($userID)) {
   <div class="wrapper">
     <!-- "" -->
     <section class="containerWrapper">
-      <header>Update Details</header>
+      <header>Updating Profile ID: <?php echo $user['uniqueID']; ?></header>
       <form action="" method="post" enctype="multipart/form-data">
         <?php
         if (isset($errorMsg)) {

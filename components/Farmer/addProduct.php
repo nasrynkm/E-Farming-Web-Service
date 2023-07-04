@@ -34,13 +34,25 @@ if (isset($_POST['addProduct'])) {
     $alert_warned[] = 'Please Fill Out All Items!';
   } else {
 
-    $post = "INSERT INTO products(Category, Price, Quantity, StartLimit, Location, userRef) VALUES('$productName', '$productPrice', '$productQuantity', '$startLimit', '$location', '$userRef')";
-    $posted = mysqli_query($connection, $post);
 
-    if ($posted) {
-      $alert_success[] = 'Product Posted successfully!';
+
+    if (!is_numeric($productQuantity) || $productQuantity <= 0) {
+      $alert_warned[] = "Product Quantity is required and should be a positive number.";
+    } else if (empty($startLimit) || !is_numeric($startLimit) || $startLimit <= 0) {
+      $alert_warned[] = "Selling Limit is required and should be a positive number.";
+    } else if (!is_numeric($productPrice) || $productPrice <= 0) {
+      $alert_warned[] = "Product Price is required and should be a positive number.";
+    } else if (empty($location) || !is_string($location) || strlen($location) > 255) {
+      $alert_warned[] = "User Location is required and should be a string with a maximum length of 255 characters.";
     } else {
-      $alert_info[] = 'Could not Add the Product!';
+      $post = "INSERT INTO products(Category, Price, Quantity, StartLimit, Location, userRef) VALUES('$productName', '$productPrice', '$productQuantity', '$startLimit', '$location', '$userRef')";
+      $posted = mysqli_query($connection, $post);
+
+      if ($posted) {
+        $alert_success[] = 'Product Posted successfully!';
+      } else {
+        $alert_info[] = 'Could not Add the Product!';
+      }
     }
   }
 }
@@ -59,7 +71,7 @@ if (isset($_POST['addProduct'])) {
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Adds Manager</title>
+  <title>Ads Manager</title>
   <link rel="stylesheet" href="../../css/addProduct.css" />
   <link rel="stylesheet" href="../../css/footer.css" />
   <link rel="stylesheet" href="../../css/dashFarming.css" />
@@ -70,13 +82,14 @@ if (isset($_POST['addProduct'])) {
 <body>
   <!-- STARTING THE HEADER SECTION -->
   <section id="header">
-    <a class="logo" href="#">E-Farming WS</a>
+    <a class="logo" href="../../index/index.html">E-FARMING WS</a>
 
     <div>
       <ul id="navigation">
         <li><a href="./farmerDash.php">Dashboard</a></li>
-        <li><a class="active" href="./addProduct.php">Adds Manager</a></li>
-        <li><a href="./viewAdds.php">View Adds</a></li>
+        <li><a class="active" href="./addProduct.php">Ads Manager</a></li>
+        <li><a href="./viewAdds.php">View Ads</a></li>
+        <li><a href="../markets.php">Markets</a></li>
         <li><a href="../logout.php?logout_id=<?php echo $user['uniqueID']; ?>">Log Out</a></li>
       </ul>
     </div>
@@ -95,8 +108,9 @@ if (isset($_POST['addProduct'])) {
 
       <ul>
         <li><a href="./farmerDash.php">Dashboard</a></li>
-        <li><a class="active" href="./addProduct.php">Adds Manager</a></li>
-        <li><a href="./viewAdds.php">View Adds</a></li>
+        <li><a class="active" href="./addProduct.php">Ads Manager</a></li>
+        <li><a href="./viewAdds.php">View Ads</a></li>
+        <li><a href="../markets.php">Markets</a></li>
         <li><a href="../logout.php?logout_id=<?php echo $user['uniqueID'] ?>">Log Out</a></li>
       </ul>
     </div>
@@ -117,10 +131,10 @@ if (isset($_POST['addProduct'])) {
                   } ?> value="Carrots">Carrots</option>
 
           <option <?php if (isset($_POST['addProduct'])) {
-                    if ($productName == "Cinnamon") {
+                    if ($productName == "Beans") {
                       echo 'selected = "selected"';
                     }
-                  } ?> value="Cinnamon">Cinnamon</option>
+                  } ?> value="Beans">Beans</option>
 
           <option <?php if (isset($_POST['addProduct'])) {
                     if ($productName == "Cloves") {
@@ -139,6 +153,11 @@ if (isset($_POST['addProduct'])) {
                     }
                   } ?> value="Garlic">Garlic</option>
           <option <?php if (isset($_POST['addProduct'])) {
+                    if ($productName == "Irish Potatoes") {
+                      echo 'selected = "selected"';
+                    }
+                  } ?> value="Irish Potatoes">Irish Potatoes</option>
+          <option <?php if (isset($_POST['addProduct'])) {
                     if ($productName == "Onions") {
                       echo 'selected = "selected"';
                     }
@@ -154,32 +173,28 @@ if (isset($_POST['addProduct'])) {
                     }
                   } ?> value="Rice">Rice</option>
           <option <?php if (isset($_POST['addProduct'])) {
-                    if ($productName == "Wheat") {
+                    if ($productName == "Wheat Grain") {
                       echo 'selected = "selected"';
                     }
-                  } ?> value="Wheat">Wheat</option>
+                  } ?> value="Wheat Grain">Wheat Grain</option>
+          <option <?php if (isset($_POST['addProduct'])) {
+                    if ($productName == "Sorghum") {
+                      echo 'selected = "selected"';
+                    }
+                  } ?> value="Sorghum">Sorghum</option>
         </select>
-        <input type="decimal" placeholder="Product Price" name="productPrice" class="itemsBox" value="<?php if (isset($_POST['addProduct'])) {
-                                                                                                        echo $productPrice;
-                                                                                                      } ?>" />
         <input type="decimal" placeholder="Quantity in Kgs" name="productQuantity" class="itemsBox" value="<?php if (isset($_POST['addProduct'])) {
                                                                                                               echo $productQuantity;
                                                                                                             } ?>" />
         <input type="decimal" placeholder="Start Limit" name="sellingLimit" class="itemsBox" value="<?php if (isset($_POST['addProduct'])) {
                                                                                                       echo $startLimit;
                                                                                                     } ?>" />
+        <input type="decimal" placeholder="Product Price/Start Limit" name="productPrice" class="itemsBox" value="<?php if (isset($_POST['addProduct'])) {
+                                                                                                                    echo $productPrice;
+                                                                                                                  } ?>" />
         <input type="text" placeholder="Your Location" name="userLocation" id="location-input" class="itemsBox" value="<?php if (isset($_POST['addProduct'])) {
                                                                                                                           echo $location;
                                                                                                                         } ?>" />
-
-        <!-- STARTING YIELD TIME IF ANY USER WANTS TO SET IT -->
-        <!-- <div class="event-form">
-          <label for="title">
-            <p>Estimated</p>
-          </label>
-          <input type="datetime-local" id="event" class="event" />
-        </div> -->
-        <!-- ENDING YIELD TIME IF ANY USER WANTS TO SET IT -->
 
         <input type="submit" class="submittBtn" name="addProduct" value="Post Product" />
       </form>
@@ -194,23 +209,21 @@ if (isset($_POST['addProduct'])) {
         <div class="footerColumn">
           <h4>E-Farming WS</h4>
           <ul>
-            <li><a href="">About US</a></li>
-            <li><a href="">Services</a></li>
-            <!-- <li><a href="">Privacy Policy</a></li> -->
+            <li><a href="../../index/About us/about us.html">About US</a></li>
+            <li><a href="../../index/Our service/Our service.html">Services</a></li>
           </ul>
         </div>
         <div class="footerColumn">
-          <h4>Help</h4>
+          <h4>Support</h4>
           <ul>
-            <li><a href="">Support</a></li>
-            <li><a href="">Feedback</a></li>
-            <!-- <li><a href="">Contacts</a></li> -->
+            <li><a href="../../index/About us/contact us.html">Feedback</a></li>
+            <li><a href="../markets.php">Markets</a></li>
           </ul>
         </div>
         <div class="footerColumn">
           <h4>Access</h4>
           <ul>
-            <li><a href="./viewAdds.php">View Adds</a></li>
+            <li><a href="./viewAdds.php">View Ads</a></li>
             <li><a href="../profile.php?userID=<?php echo $user['uniqueID'] ?>">Profile</a></li>
             <li><a href="../logout.php?logout_id=<?php echo $user['uniqueID'] ?>">Log Out</a></li>
           </ul>
@@ -232,7 +245,6 @@ if (isset($_POST['addProduct'])) {
 
   <!-- WHERE SCRIPTS STARTS -->
   <script src="../../js/toggleButton.js"></script>
-  <script src="../../js/googlePlaces.js"></script>
 
   <!-- SweetAlert CDN js Link and PhP file -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>e-farming</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    />
+    <style>
+      .login-link {
+        float: right;
+        margin-top: 10px;
+        margin-right: 20px;
+        color: #000;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="sidebar">
+      <a href="#" class="logo">Admin</a>
+      <div class="menu-content">
+        <ul class="menu-items">
+          <li class="item">
+            <a href="?page=dashboard">Dashboard</a>
+          </li>
+          <li class="item">
+            <a href="?page=users">Users</a>
+          </li>
+          <li class="item">
+            <a href="?page=product">View Ads</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <nav class="navbar">
+      <a href="#" class="login-link">Login</a>
+      <i class="fa-solid fa-bars" id="sidebar-close"></i>
+    </nav>
+    <br /><br />
+    <iframe
+      src="pages/<?= $page ?>.php"
+      class="main"
+      style="overflow-x: scroll; border: none"
+    ></iframe>
+    <script src="../js/script.js"></script>
+  </body>
+</html>

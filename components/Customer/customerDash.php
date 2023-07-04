@@ -29,7 +29,7 @@ if (mysqli_num_rows($checked) > 0) {
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Farmer's Dashboard</title>
+  <title>Customer's Dashboard</title>
   <link rel="stylesheet" href="../../css/dashFarming.css" />
   <link rel="stylesheet" href="../../css/pageTips.css" />
   <link rel="stylesheet" href="../../css/footer.css" />
@@ -39,15 +39,14 @@ if (mysqli_num_rows($checked) > 0) {
 <body>
   <section>
     <section id="header">
-      <a class="logo" href="#">E-Farming WS</a>
+      <a class="logo" href="../../index/index.html">E-FARMING WS</a>
 
       <div>
         <ul id="navigation">
           <li><a class="active" href="./customerDash.php">Dashboard</a></li>
-          <li><a href="./viewFarmerAdds.php">View Adds</a></li>
+          <li><a href="./viewFarmerAdds.php">View Ads</a></li>
+          <li><a href="../markets.php">Markets</a></li>
           <li><a href="../logout.php?logout_id=<?php echo $user['uniqueID']; ?>">Log Out</a></li>
-          <!-- <input type="text" placeholder="Enter text to search..." /> -->
-          <!-- <button><i class="fas fa-search"></i></button> -->
         </ul>
       </div>
 
@@ -65,7 +64,8 @@ if (mysqli_num_rows($checked) > 0) {
 
         <ul>
           <li><a class="active" href="./customerDash.php">Dashboard</a></li>
-          <li><a href="./viewFarmerAdds.php">View Adds</a></li>
+          <li><a href="./viewFarmerAdds.php">View Ads</a></li>
+          <li><a href="../markets.php">Markets</a></li>
           <li><a href="../logout.php?logout_id=<?php echo $user['uniqueID']; ?>">Log Out</a></li>
         </ul>
       </div>
@@ -76,9 +76,9 @@ if (mysqli_num_rows($checked) > 0) {
     <section class="pageTips">
       <!-- CONTAINER 01 -->
       <div class="containerTips containerLeft">
-        <img src="../uploaded/<?php echo $user['profilePhoto'] ?>" alt="icon" />
+        <img src="../../img/game-coin_78370-461.jpg" alt="icon" />
         <div class="textBox">
-          <h2>Hello <?php echo $user['firstName'] ?></h2>
+          <h2>Habari <?php echo $user['firstName'] ?></h2>
           <p>
             Karibu E-Farming Web Service, kama Customer unaweza kutizama chapisho mbalimbali za wakulima kutoka kila kona ya Tanzania. Tunafurahi kua nawe.
           </p>
@@ -88,9 +88,9 @@ if (mysqli_num_rows($checked) > 0) {
 
       <!-- CONTAINER 02 -->
       <div class="containerTips containerRight">
-        <img src="../uploaded/<?php echo $user['profilePhoto'] ?>" alt="icon" />
+        <img src="../../img/game-coin_78370-461.jpg" alt="icon" />
         <div class="textBox">
-          <h2>view Adds</h2>
+          <h2>View Adds</h2>
           <p>
             Katika kipengele hiki utakuta machapisho yote kutoka kwa wakulima mbalimbali. Hivo utaweza kuperuzi bei, idadi ya mazao, paha;li mkulima alipo na kiwango chake cha uuzaji.
           </p>
@@ -100,7 +100,7 @@ if (mysqli_num_rows($checked) > 0) {
 
       <!-- CONTAINER 03 -->
       <div class="containerTips containerLeft">
-        <img src="../uploaded/<?php echo $user['profilePhoto'] ?>" alt="icon" />
+        <img src="../../img/game-coin_78370-461.jpg" alt="icon" />
         <div class="textBox">
           <h2>Profile Photo</h2>
           <p>
@@ -112,7 +112,7 @@ if (mysqli_num_rows($checked) > 0) {
 
       <!-- CONTAINER 04 -->
       <div class="containerTips containerRight">
-        <img src="../uploaded/<?php echo $user['profilePhoto'] ?>" alt="icon" />
+        <img src="../../img/game-coin_78370-461.jpg" alt="icon" />
         <div class="textBox">
           <h2>Log Out</h2>
           <p>
@@ -143,23 +143,21 @@ if (mysqli_num_rows($checked) > 0) {
           <div class="footerColumn">
             <h4>E-Farming WS</h4>
             <ul>
-              <li><a href="">About US</a></li>
-              <li><a href="">Services</a></li>
-              <!-- <li><a href="">Privacy Policy</a></li> -->
+              <li><a href="../../index/About us/about us.html">About US</a></li>
+              <li><a href="../../index/Our service/Our service.html">Services</a></li>
             </ul>
           </div>
           <div class="footerColumn">
-            <h4>Help</h4>
+            <h4>Support</h4>
             <ul>
-              <li><a href="">Support</a></li>
-              <li><a href="">Feedback</a></li>
-              <!-- <li><a href="">Contacts</a></li> -->
+              <li><a href="../../index/About us/contact us.html">Feedback</a></li>
+              <li><a href="../markets.php">Markets</a></li>
             </ul>
           </div>
           <div class="footerColumn">
             <h4>Access</h4>
             <ul>
-              <li><a href="./viewFarmerAdds.php">View Adds</a></li>
+              <li><a href="./viewFarmerAdds.php">View Ads</a></li>
               <li><a href="../profile.php?userID=<?php echo $user['uniqueID']; ?>">Profile</a></li>
               <li><a href="../logout.php?logout_id=<?php echo $user['uniqueID'] ?>">Log Out</a></li>
             </ul>

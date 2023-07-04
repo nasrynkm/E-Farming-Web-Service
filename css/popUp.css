@@ -6,198 +6,172 @@
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue";
 }
-body {
-  overflow: hidden;
-}
 
-.contactSection {
-  position: relative;
-  height: 100vh;
+/* Styling for the popup modal */
+#popupModal {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.contactSection .profile {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.contactSection .show .profile {
-  display: none;
-}
-
-.contactSection .profile .profile-img {
-  height: 150px;
-  width: 150px;
-  border-radius: 50%;
-  background: #4070f4;
-  padding: 2px;
-  margin-bottom: 20px;
-}
-
-.profile .profile-img img {
   height: 100%;
-  width: 100%;
-  object-fit: cover;
-  border-radius: 50%;
-  border: 3px solid #fff;
-}
-
-.profile .name,
-.profile .profession {
-  font-size: 22px;
-  font-weight: 500;
-  color: #333;
-}
-
-.profile .profession {
-  font-weight: 400;
-  margin-top: -6px;
-}
-
-.profile .button {
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
+  justify-content: center;
   align-items: center;
-  padding: 12px 25px;
-  background: #4070f4;
-  margin-top: 20px;
-  border-radius: 6px;
-  cursor: pointer;
+  z-index: 9999;
+}
+
+#popupModal .close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
   font-size: 24px;
-  transition: all 0.3s ease;
-}
-
-.profile .button:hover {
-  background: #275df1;
-}
-
-.profile .button i {
-  color: #fff;
-  font-size: 22px;
-  margin-right: 5px;
-}
-
-.profile .button button {
-  background: none;
-  outline: none;
+  cursor: pointer;
+  color: #ffffff;
+  background-color: #333333;
   border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+#popupModal .close:hover {
+  background-color: #555555;
+}
+
+#popupModal #detailsContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 600px;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 5px;
+}
+
+#popupModal #imageContainer {
+  flex: 0 0 40%;
+  margin-right: 20px;
+}
+
+#popupModal #nameContainer {
+  flex: 1 1 60%;
+}
+
+#popupModal #nameContainer h2 {
   font-size: 20px;
-  color: #fff;
-  pointer-events: none;
+  margin-bottom: 10px;
 }
 
-.contactSection .popup-outer {
-  position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  width: 100%;
-  background: rgba(0, 0, 0, 0.4);
-  opacity: 0;
-  pointer-events: none;
-  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-  transform: scale(1.2);
-  transition: all 0.3s ease-in-out;
+#popupModal #nameContainer p {
+  margin-bottom: 5px;
+  font-size: 16px;
 }
 
-.contactSection .show .popup-outer {
-  opacity: 1;
-  pointer-events: auto;
-  transform: scale(1);
+#popupModal #profileImage {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
 }
 
-.contactSection .popup-box {
-  position: relative;
-  padding: 30px;
-  max-width: 420px;
-  width: 100%;
-  background: #fff;
-  border-radius: 12px;
-}
-.popup-box .close {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  font-size: 30px;
-  color: #b4b4b4;
+.phoneNumberElement,
+.emailElement {
   cursor: pointer;
-  transition: all 0.2s ease;
-}
-.popup-box .close:hover {
-  color: #333;
-}
-.contactSection .popup-box .profile-text {
-  display: flex;
-  align-items: center;
-}
-.contactSection .popup-box img {
-  height: 4.375rem;
-  width: 4.375rem;
-  object-fit: cover;
-  border-radius: 50%;
-}
-.profile-text .text {
-  display: flex;
-  flex-direction: column;
-  margin-left: 15px;
-}
-.profile-text .text .name {
-  font-size: 1.3rem;
-  font-weight: 400;
-}
-.profile-text .text .profession {
-  font-size: 1rem;
-  font-weight: 500;
+  transition: transform 0.3s ease-in-out;
 }
 
-.detailsProf {
-  margin-top: 0.5rem;
-  font-size: 0.9rem;
+.phoneNumberElement:hover,
+.phoneNumberElement:active,
+.emailElement:hover,
+.emailElement:active {
+  font-size: 1.2em;
 }
-.detailsProf .fa-solid {
-  margin-right: 0.3rem;
+
+.phoneNumberElement:hover,
+.phoneNumberElement:active {
+  color: #ff4081;
 }
-.contactSection .popup-box textarea {
-  min-height: 150px;
-  width: 100%;
-  margin-top: 0.5rem;
-  outline: none;
-  border: 1px solid #ddd;
-  padding: 12px;
-  border-radius: 6px;
-  resize: none;
-  font-size: 1rem;
-  font-weight: 400;
-  background: #f3f3f3;
+
+.emailElement:hover,
+.emailElement:active {
+  color: #2196f3;
 }
-.contactSection .popup-box .button {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 15px;
+
+/* Responsive styling for different devices */
+
+/* For mobile devices */
+@media (max-width: 767px) {
+  #popupModal #detailsContainer {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #popupModal #imageContainer {
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+
+  #popupModal #nameContainer {
+    width: 100%;
+  }
+
+  #popupModal #nameContainer h2 {
+    font-size: 18px;
+    text-align: center;
+  }
+
+  #popupModal #nameContainer p {
+    text-align: center;
+  }
 }
-.popup-box .button button {
-  outline: none;
-  border: none;
-  padding: 8px 14px;
-  border-radius: 6px;
-  background: #6f93f6;
-  margin-left: 12px;
-  color: #fff;
-  font-size: 14px;
-  cursor: pointer;
-  transition: all 0.3s ease;
+
+@media (min-width: 390px) and (max-width: 767px) {
+  #popupModal {
+    padding: 6rem 1rem;
+  }
+
+  #popupModal #detailsContainer {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  #popupModal #nameContainer p {
+    text-align: justify;
+    padding-left: 1.5rem;
+  }
 }
-.button button.cancel {
-  background: #f082ac;
+
+@media (min-width: 390px) and (max-width: 640px) {
+  #popupModal .close {
+    top: 5rem;
+  }
 }
-.button button.cancel:hover {
-  background: #ec5f95;
+
+@media (max-width: 389px) {
+  #popupModal {
+    padding: 1rem;
+  }
+
+  #popupModal #nameContainer p {
+    text-align: justify;
+  }
 }
-.button button.send:hover {
-  background: #275df1;
+
+/* For tablets and small desktop screens */
+@media (min-width: 768px) and (max-width: 991px) {
+  #popupModal #detailsContainer {
+    max-width: 500px;
+  }
+}
+
+/* For large desktop screens and above */
+@media (min-width: 992px) {
+  #popupModal #detailsContainer {
+    max-width: 700px;
+  }
+}
+
+@media (min-width: 768px) {
+  #popupModal {
+    padding: 6rem;
+  }
 }

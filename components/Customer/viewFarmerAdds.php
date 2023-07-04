@@ -34,13 +34,15 @@ if (mysqli_num_rows($checked) > 0) {
     <link rel="stylesheet" href="../../css/adds.css">
     <link rel="stylesheet" href="../../css/cattings.css">
     <link rel="stylesheet" href="../../css/count.css">
+    <link rel="stylesheet" href="../../css/search.css">
+    <link rel="stylesheet" href="../../css/popUp.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
     <section>
         <section id="header">
-            <a class="logo" href="#">E-Farming WS</a>
+            <a class="logo" href="../../index/index.html">E-FARMING WS</a>
 
             <?php
             //  EXTRACTING USER USING SESSION 
@@ -57,10 +59,9 @@ if (mysqli_num_rows($checked) > 0) {
             <div>
                 <ul id="navigation">
                     <li><a href="./customerDash.php">Dashboard</a></li>
-                    <li><a class="active" href="./viewFarmerAdds.php">View Adds</a></li>
+                    <li><a class="active" href="./viewFarmerAdds.php">View Ads</a></li>
+                    <li><a href="../markets.php">Markets</a></li>
                     <li><a href="../logout.php?logout_id=<?php echo $img['uniqueID']; ?>">Log Out</a></li>
-                    <!-- <input type="text" placeholder="Enter text to search..." /> -->
-                    <!-- <button><i class="fas fa-search"></i></button> -->
                 </ul>
             </div>
 
@@ -78,7 +79,8 @@ if (mysqli_num_rows($checked) > 0) {
 
                 <ul>
                     <li><a href="./customerDash.php">Dashboard</a></li>
-                    <li><a class="active" href="./viewFarmerAdds.php">View Adds</a></li>
+                    <li><a class="active" href="./viewFarmerAdds.php">View Ads</a></li>
+                    <li><a href="../markets.php">Markets</a></li>
                     <li><a href="../logout.php?logout_id=<?php echo $img['uniqueID']; ?>">Log Out</a></li>
                 </ul>
             </div>
@@ -97,8 +99,8 @@ if (mysqli_num_rows($checked) > 0) {
                                 </a>
                             </div>
                             <div class="allItemsContainer">
-                                <a onclick="fetchProducts('Cinnamon')">
-                                    <h2 class="allInnerItems">Cinnamon</h2>
+                                <a onclick="fetchProducts('Beans')">
+                                    <h2 class="allInnerItems">Beans</h2>
                                 </a>
                             </div>
                             <div class="allItemsContainer">
@@ -117,6 +119,11 @@ if (mysqli_num_rows($checked) > 0) {
                                 </a>
                             </div>
                             <div class="allItemsContainer">
+                                <a onclick="fetchProducts('Irish Potatoes')">
+                                    <h2 class=" allInnerItems">Irish Potatoes</h2>
+                                </a>
+                            </div>
+                            <div class="allItemsContainer">
                                 <a onclick="fetchProducts('Onions')">
                                     <h2 class="allInnerItems">Onions</h2>
                                 </a>
@@ -132,14 +139,26 @@ if (mysqli_num_rows($checked) > 0) {
                                 </a>
                             </div>
                             <div class="allItemsContainer">
-                                <a onclick="fetchProducts('Wheat')">
-                                    <h2 class="allInnerItems">Wheat</h2>
+                                <a onclick="fetchProducts('Wheat Grain')">
+                                    <h2 class="allInnerItems">Wheat Grain</h2>
+                                </a>
+                            </div>
+                            <div class="allItemsContainer">
+                                <a onclick="fetchProducts('Sorghum')">
+                                    <h2 class="allInnerItems">Sorghum</h2>
                                 </a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <!-- SEARCH AND FILTER STARTING -->
+            <div class="search-container">
+                <input type="text" id="search-input" placeholder="Search..." />
+                <button class="submit-button" id="submitButton">Search</button>
+            </div>
+            <!-- ENDING SEARCH AND FILTER -->
         </div>
         <!-- ENDING THE CROP NAVIGATIONS -->
 
@@ -156,23 +175,21 @@ if (mysqli_num_rows($checked) > 0) {
                     <div class="footerColumn">
                         <h4>E-Farming WS</h4>
                         <ul>
-                            <li><a href="">About US</a></li>
-                            <li><a href="">Services</a></li>
-                            <!-- <li><a href="">Privacy Policy</a></li> -->
+                            <li><a href="../../index/About us/about us.html">About US</a></li>
+                            <li><a href="../../index/Our service/Our service.html">Services</a></li>
                         </ul>
                     </div>
                     <div class="footerColumn">
-                        <h4>Help</h4>
+                        <h4>Support</h4>
                         <ul>
-                            <li><a href="">Support</a></li>
-                            <li><a href="">Feedback</a></li>
-                            <!-- <li><a href="">Contacts</a></li> -->
+                            <li><a href="../../index/About us/contact us.html">Feedback</a></li>
+                            <li><a href="../markets.php">Markets</a></li>
                         </ul>
                     </div>
                     <div class="footerColumn">
                         <h4>Access</h4>
                         <ul>
-                            <li><a href="./viewFarmerAdds.php">View Adds</a></li>
+                            <li><a href="./viewFarmerAdds.php">View Ads</a></li>
                             <li><a href="../profile.php?userID=<?php echo $img['uniqueID']; ?>">Profile</a></li>
                             <li><a href="../logout.php?logout_id=<?php echo $img['uniqueID'] ?>">Log Out</a></li>
                         </ul>
@@ -195,8 +212,6 @@ if (mysqli_num_rows($checked) > 0) {
     <script src="../../js/toggleButton.js" async></script>
     <script src="../../js/cropMenu.js" async></script>
     <script src="../../js/adds.js" defer></script>
-
-    <!-- <script src="../../js/addsDash.js" defer></script> -->
 
 
 </body>

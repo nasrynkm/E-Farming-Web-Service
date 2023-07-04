@@ -43,7 +43,7 @@ if (isset($_SESSION['uniqueID']) && isset($userID)) {
   <!-- BEGINS THE USER PROFILE -->
   <div class="wrapper">
     <section class="containerWrapper">
-      <header>User Profile</header>
+      <header>Profile ID: <?php echo $user['uniqueID']; ?></header>
       <form action="" method="post" enctype="multipart/form-data">
         <div class="user-details">
           <div class="field input">
