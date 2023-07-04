@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 03, 2023 at 02:38 PM
+-- Generation Time: Jul 04, 2023 at 09:10 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -40,6 +40,21 @@ CREATE TABLE `products` (
   `eventDate` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`ID`, `Category`, `Price`, `Quantity`, `StartLimit`, `Location`, `userRef`, `eventDate`) VALUES
+(19, 'Beans', 240000.00, 400.00, 100.00, 'Ujiji, Kigoma', 454377260, NULL),
+(21, 'Beans', 275000.00, 200.00, 100.00, 'Ujiji, Kigoma', 454377260, NULL),
+(22, 'Beans', 287000.00, 650.00, 50.00, 'Ndala, Shinyanga', 1133929943, NULL),
+(23, 'Beans', 235000.00, 650.00, 50.00, 'Ndala, Shinyanga', 1133929943, NULL),
+(24, 'Wheat', 100000.00, 600.00, 100.00, 'Ujiji, Kigoma', 454377260, '1970-01-01 01:00:00'),
+(25, 'Wheat', 950000.00, 600.00, 200.00, 'Ujiji, Kigoma', 454377260, '1970-01-01 01:00:00'),
+(26, 'Rice', 140000.00, 450.00, 50.00, 'Ujiji, Kigoma', 454377260, NULL),
+(27, 'Rice', 130000.00, 450.00, 200.00, 'Ujiji, Kigoma', 454377260, '0000-00-00 00:00:00'),
+(28, 'Sorghum', 120000.00, 500.00, 100.00, 'Ujiji, Kigoma', 454377260, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -64,9 +79,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`userID`, `uniqueID`, `firstName`, `lastName`, `email`, `phone`, `locationed`, `passwords`, `account`, `profilePhoto`) VALUES
-(12, 420374667, 'Osama', 'Admin', 'efarming.wb@gmail.com', '0692263555', 'Kibada, Dar es Salaam', 'kijiko2023', 'Admin', '1688386338IMG_0414.jpeg'),
-(13, 454377260, 'Nasry', 'Mansour', 'nasrynkm24@gmail.com', '0688897697', 'Ujiji, Kigoma', 'kijiko2022', 'Farmer', '1688386634IMG_0701.jpeg'),
-(14, 1563230922, 'Amir', 'Sudo', 'amirisenge@gmail.com', '0653563352', 'Kimara, Dar es Salaam', 'kijiko2021', 'Customer', '1688387238PXL_20230627_120958667.PORTRAIT.jpg');
+(12, 420374667, 'Osama', 'Admin', 'efarming.wb@gmail.com', '0692263555', 'Kibada, Dar es Salaam', '$2y$12$jzzz3PB8gVZFqQkdWbk11uLhIPRHRBCY0CLr7Rs4F.PntqgceOX5G', 'Admin', '1688386338IMG_0414.jpeg'),
+(13, 454377260, 'Nasry', 'Mansour', 'nasrynkm24@gmail.com', '0688897697', 'Ujiji, Kigoma', '$2y$12$wT1oT3jZ/xEP4b7ENc5gqeFjEJW.tp7cLVBjX4e7ZoSClwv90.1p6', 'Farmer', '1688497019PXL_20230627_121008616.PORTRAIT.jpg'),
+(14, 1563230922, 'Amir', 'Sudo', 'amirisenge@gmail.com', '0653563352', 'Kimara, Dar es Salaam', '$2y$12$PE41o0t7CANOXyUgfIDzZuRcsF.W81A8TxaUy1Eku5rne0DEFOmEe', 'Customer', '1688387238PXL_20230627_120958667.PORTRAIT.jpg'),
+(15, 1133929943, 'Amiri', 'Ntunduu', 'sudo69@gmail.com', '0753932752', 'Ndala, Shinyanga', '$2y$12$cwdJzB/jadQ1EetOchxJuu167/ZFSWiSguNkv2EEBep5rKyl5WwKS', 'Farmer', '1688405137PXL_20230627_120958667.PORTRAIT.jpg'),
+(16, 234126524, 'Masembo', 'Kateule', 'masembo@gmail.com', '0688897697', 'Mtwara', '$2y$12$1fPJ0tDnhz1Kbzm430ricu6itg25zlQa9rduvXoIIXfeaa8dAs2Oa', 'Customer', '1688486042PXL_20230627_120958667.PORTRAIT.jpg');
 
 --
 -- Indexes for dumped tables
@@ -92,13 +109,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `userID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `userID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- Database: `phpmyadmin`
 --
@@ -248,7 +265,7 @@ CREATE TABLE `pma__recent` (
 --
 
 INSERT INTO `pma__recent` (`username`, `tables`) VALUES
-('root', '[{\"db\":\"e-farming_ws\",\"table\":\"users\"},{\"db\":\"e-farming_ws\",\"table\":\"products\"},{\"db\":\"e-farming_ws\",\"table\":\"event_durations\"}]');
+('root', '[{\"db\":\"e-farming_ws\",\"table\":\"products\"},{\"db\":\"e-farming_ws\",\"table\":\"users\"},{\"db\":\"e-farming_ws\",\"table\":\"event_durations\"}]');
 
 -- --------------------------------------------------------
 
@@ -363,7 +380,7 @@ CREATE TABLE `pma__userconfig` (
 --
 
 INSERT INTO `pma__userconfig` (`username`, `timevalue`, `config_data`) VALUES
-('root', '2023-07-03 12:37:06', '{\"Console\\/Mode\":\"collapse\"}');
+('root', '2023-07-04 19:10:06', '{\"Console\\/Mode\":\"collapse\"}');
 
 -- --------------------------------------------------------
 
